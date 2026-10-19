@@ -1,9 +1,7 @@
-PULSE TILES CATALOGUE RECOVERY PATCH v1.2.4
+Pulse Tiles Hardware display-only patch v1.2.5
 
-1. Extract and upload the files in this ZIP to the EXACT matching locations in your EXISTING GitHub repository.
-2. Replace only those files. DO NOT remove any existing files or folders.
-3. IMPORTANT: This patch deliberately DOES NOT contain /data/ files. The original 5 catalogues and previously added hardware data should stay in /data/ on GitHub.
-4. Wait for GitHub Pages deployment. Close open app tabs; reopen at your usual URL and hard refresh Ctrl+Shift+R.
-5. If the error continues, send a screenshot of the new error text.
-
-Fix: hardware catalogue rows without codes no longer crash the catalogue merger. Products previously displayed as zero because rendering failed, not because this patch removed them.
+Upload the 5 files within sales-app/ to the SAME sales-app/ directory in your GitHub repository, replacing matching files.
+DO NOT remove or overwrite the data/ directory.
+Changes: image-free Hardware cards show a compact, labeled category icon rather than the large Pulse logo; shorter images and improved card spacing. Real image URLs will display normally when provided in future catalogue records.
+Existing catalogue, product prices, quotations, orders, and data files are untouched.
+After deployment refresh with Ctrl+Shift+R.

@@ -30,7 +30,7 @@ let quoteHistory = loadQuoteHistory();
 let currentQuoteNumber = '';
 let currentQuoteSavedId = '';
 let smartMeasureState={productKey:'',area:0,boxes:0,cover:0,total:0,baseArea:0,wastePct:0,layout:'straight'};
-const CURRENT_APP_VERSION='1.2.4';
+const CURRENT_APP_VERSION='1.2.5';
 const PRIMARY_ADMIN_EMAIL=salesAppConfig.adminEmail.trim().toLowerCase();
 let catalogueUpdatedAt=null;
 let cloudQuotes=[];
@@ -647,10 +647,17 @@ function render(){
   filtered.forEach(p=>{
     const key=productKey(p);
     const card=document.createElement('article'); card.className='product-card';
-    card.innerHTML=`<div class="product-image">
+    const isHardware=p._type==='hardware';
+    const hwGroup=(Array.isArray(p.hardware_groups)&&p.hardware_groups[0])||'tools';
+    const hwIcons={tools:'fa-screwdriver-wrench',electrical:'fa-plug',paints:'fa-paint-roller',lighting:'fa-lightbulb',consumables:'fa-toolbox',ladders:'fa-person-arrow-up-from-line',trolleys:'fa-dolly',plumbing:'fa-faucet-drip'};
+    const hwLabels={tools:'Tools',electrical:'Electrical',paints:'Paints',lighting:'Lighting',consumables:'Consumables',ladders:'Ladders',trolleys:'Trolleys',plumbing:'Plumbing'};
+    const noHardwarePhoto=isHardware&&(!p.image&&!p.images&&!p.image_url&&!p.thumbnail&&!p.featured_image);
+    const hwPlaceholder=`<div class="hardware-photo-placeholder"><i class="fa-solid ${hwIcons[hwGroup]||hwIcons.tools}" aria-hidden="true"></i><span>${hwLabels[hwGroup]||'Hardware'}</span><small>Product image pending</small></div>`;
+    card.classList.toggle('hardware-product-card',isHardware);
+    card.innerHTML=`<div class="product-image ${isHardware?'hardware-product-image':''}">
       <button class="fav-btn ${isFavourite(p)?'active':''}" type="button" title="Favourite"><i class="${isFavourite(p)?'fa-solid':'fa-regular'} fa-star"></i></button>
       <label class="compare-check"><input type="checkbox" ${compareKeys.includes(key)?'checked':''}><span>Compare</span></label>
-      <img loading="lazy" referrerpolicy="no-referrer" src="${esc(p._image)}" alt="${esc(p._name)}" onerror="this.onerror=null;this.src='./logo.png'">
+      ${noHardwarePhoto?hwPlaceholder:`${isHardware?`<div class="hardware-photo-placeholder" hidden><i class="fa-solid ${hwIcons[hwGroup]||hwIcons.tools}"></i><span>${hwLabels[hwGroup]||'Hardware'}</span><small>Product image pending</small></div>`:''}<img loading="lazy" referrerpolicy="no-referrer" src="${esc(p._image)}" alt="${esc(p._name)}" onerror="this.onerror=null;${isHardware?`this.replaceWith(this.parentElement.querySelector('.hardware-photo-placeholder'));`:`this.src='./logo.png'`}">`}
     </div><div class="product-card-body"><span class="product-kind">${typeLabel(p._type)}</span><h3>${esc(p._name)}</h3><span class="card-code">CODE: ${esc(p._code||'—')}</span><div class="card-price">${productPrice(p)}${productUnitLabel(p)?'<small>'+productUnitLabel(p)+'</small>':''}</div><button class="view-btn" type="button"><i class="fa-regular fa-eye"></i> View Details</button></div>`;
     qs('.view-btn',card).onclick=()=>openProduct(p);
     qs('.fav-btn',card).onclick=e=>{e.stopPropagation();toggleFavourite(p)};

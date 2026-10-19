@@ -1,5 +1,5 @@
 const APP=new URL('./',self.location.href);
-const PREFIX='pulse-github-'+APP.pathname+'-', CACHE=PREFIX+'v1.2.4';
+const PREFIX='pulse-github-'+APP.pathname+'-', CACHE=PREFIX+'v1.2.5';
 // Only cache application shell assets during install. Catalogues are fetched independently.
 const FILES=['./','./index.html','./styles.css','./app.js','./pulse-storage.js','./decor-catalogue.js','./hardware-catalogue.js','./firebase-config.js','./logo.png','./manifest.webmanifest','./app-version.json','./icons/icon-192.png','./icons/icon-512.png'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>Promise.allSettled(FILES.map(item=>cache.add(new URL(item,APP).href)))).then(()=>self.skipWaiting())));
