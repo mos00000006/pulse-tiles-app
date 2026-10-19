@@ -111,17 +111,26 @@ export async function checkConnection(){if(storageMode==='device'){await localDa
 
 export async function createTeamMember({name,email,role,password}){
   if(storageMode!=='firebase')throw new Error('Configure Pulse Firebase to enable shared staff access.');
-  await loadFirebase();email=email.toLowerCase().trim();
-  await setDoc(doc(null,'salesInvites',email),{name,email,role,active:true,department:'pulse-sales',updatedAt:serverTimestamp()},{merge:true});
+  email=String(email||'').toLowerCase().trim();name=String(name||'').trim();
+  if(email===salesAppConfig.adminEmail.toLowerCase().trim())throw new Error('This is the protected primary administrator. Create this account in Firebase Authentication, then sign in.');
+  if(!name||!/^\S+@\S+\.\S+$/.test(email)||!['sales','admin'].includes(role)||typeof password!=='string'||password.length<6)throw new Error('Enter a full name, valid email, role and a password of at least 6 characters.');
+  await loadFirebase();
+  if(!primaryAuth.currentUser)throw new Error('Sign in as a Pulse administrator first.');
+  const actor=await resolveUser(primaryAuth.currentUser);
+  if(actor.access.role!=='admin')throw new Error('Only an administrator can add team members.');
   const instance=sdk.app.getApps().find(a=>a.name==='pulse-account-creator')||sdk.app.initializeApp(firebaseConfig,'pulse-account-creator');
   const creator=sdk.auth.getAuth(instance);
+  let created;
   try{
-    const created=await sdk.auth.createUserWithEmailAndPassword(creator,email,password);
-    await sdk.auth.updateProfile(created.user,{displayName:name});
-    await setDoc(doc(null,'salesUsers',created.user.uid),{name,email,role,active:true,department:'pulse-sales',updatedAt:serverTimestamp()},{merge:true});
-    return 'Staff account created. The temporary password can be used to sign in.';
-  }catch(error){
-    if(error.code==='auth/email-already-in-use')return 'Access approved for the existing account. Its password is unchanged; use Forgot password if required.';
-    await setDoc(doc(null,'salesInvites',email),{active:false},{merge:true});throw error;
-  }finally{await sdk.auth.signOut(creator);}
+    await sdk.auth.setPersistence(creator,sdk.auth.inMemoryPersistence);
+    try{created=await sdk.auth.createUserWithEmailAndPassword(creator,email,password);}catch(error){if(error.code!=='auth/email-already-in-use')throw error;}
+    try{
+      await setDoc(doc(null,'salesInvites',email),{name,email,role,active:true,department:'pulse-sales',updatedAt:serverTimestamp()},{merge:true});
+    }catch(error){
+      if(created)await sdk.auth.deleteUser(created.user).catch(()=>{});
+      throw error;
+    }
+    if(created)await sdk.auth.updateProfile(created.user,{displayName:name}).catch(()=>{});
+    return created?'Staff account created. The temporary password can be used to sign in.':'Access approved for the existing account. Its password is unchanged; use Forgot password if required.';
+  }finally{await sdk.auth.signOut(creator).catch(()=>{});}
 }

@@ -13,23 +13,25 @@ separate.
    messagingSenderId and appId from that project's settings.
    Do not put service-account keys or passwords in these public files.
 
-2. SET THE ADMINISTRATOR EMAIL
-   In sales-app/firebase-config.js set salesAppConfig.adminEmail to the
-   lowercase email address that will own the Pulse sales app.
-   In firestore.rules replace REPLACE_WITH_PULSE_ADMIN_EMAIL with the same
-   lowercase address. This must match the administrator's Firebase account.
+2. PRIMARY ADMINISTRATOR — ALREADY CONFIGURED
+   moyanamoses006@icloud.com
+   This email is set in sales-app/firebase-config.js and firestore.rules.
+   It is protected from being disabled or demoted through the team screen.
+   Setting the email in these files does not create a Firebase account.
 
 3. ENABLE EMAIL/PASSWORD AUTHENTICATION
    In Firebase Authentication enable the Email/Password provider.
    In Authentication > Users create the administrator account with that
-   exact email and a password. In Authentication's authorised domains add
+   email moyanamoses006@icloud.com and choose its password privately there.
+   Create this administrator account before enabling the cloud app.
+   In Authentication's authorised domains add
    your GitHub Pages hostname, for example yourname.github.io, and any
    custom domain that you use.
 
 4. CREATE FIRESTORE AND APPLY THE RULES
    Create a Cloud Firestore database in production mode.
    In its Rules editor paste the complete contents of firestore.rules
-   after replacing the administrator email, then publish those rules.
+   then publish those rules. The administrator email is already filled in.
 
    The included rules restrict customers/quotations to their owner and
    administrators, restrict staff role changes to administrators, and

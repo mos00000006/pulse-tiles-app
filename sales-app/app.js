@@ -1,5 +1,6 @@
 import { storageMode, deviceSession, rememberedDeviceName, watchCloudSession, signIn, signOut, resetPassword, createTeamMember, checkConnection } from './pulse-storage.js';
 import { doc, getDoc, setDoc, collection, getDocs, updateDoc, deleteDoc, query, where, serverTimestamp } from './pulse-storage.js';
+import { salesAppConfig } from './firebase-config.js';
 
 
 const $ = (id) => document.getElementById(id);
@@ -27,7 +28,8 @@ let quoteHistory = loadQuoteHistory();
 let currentQuoteNumber = '';
 let currentQuoteSavedId = '';
 let smartMeasureState={productKey:'',area:0,boxes:0,cover:0,total:0,baseArea:0,wastePct:0,layout:'straight'};
-const CURRENT_APP_VERSION='1.1.0';
+const CURRENT_APP_VERSION='1.1.1';
+const PRIMARY_ADMIN_EMAIL=salesAppConfig.adminEmail.trim().toLowerCase();
 let catalogueUpdatedAt=null;
 let cloudQuotes=[];
 let cloudCustomers=[];
@@ -211,7 +213,7 @@ if ('serviceWorker' in navigator) window.addEventListener('load',async()=>{
       refreshing=true;
       window.location.reload();
     });
-    const reg=await navigator.serviceWorker.register('./sw.js?v=20261018-github1',{updateViaCache:'none'});
+    const reg=await navigator.serviceWorker.register('./sw.js?v=20261019-users1',{updateViaCache:'none'});
     await reg.update();
   }catch(e){console.warn('Service worker update skipped',e);}
 });
@@ -400,10 +402,10 @@ async function loadSalesTeam(){
     const rows=new Map();a.forEach(d=>{const r=d.data();rows.set(r.email,{...r,uid:d.id});});b.forEach(d=>{const r=d.data();rows.set(r.email,{...rows.get(r.email),...r});});
     $('sales-team-count').textContent=rows.size;list.innerHTML='';
     for(const row of [...rows.values()].sort((a,b)=>(a.name||a.email).localeCompare(b.name||b.email))){
-      const self=row.email===auth.currentUser.email,active=row.active!==false;
+      const self=row.email===auth.currentUser.email,primary=String(row.email||'').toLowerCase()===PRIMARY_ADMIN_EMAIL,active=primary||row.active!==false;
       const el=document.createElement('div');el.className='team-user'+(active?'':' inactive');
-      el.innerHTML=`<span class="team-avatar"><i class="fa-solid fa-user"></i></span><div class="team-user-copy"><strong>${esc(row.name||row.email)}</strong><span>${esc(row.email)}</span><small>${row.role==='admin'?'ADMINISTRATOR':'SALESPERSON'} · ${active?'ACTIVE':'DISABLED'}</small></div>${self?'<span class="team-self">You</span>':`<div class="team-actions"><button type="button" data-toggle title="${active?'Disable':'Enable'} access"><i class="fa-solid ${active?'fa-user-slash':'fa-user-check'}"></i></button></div>`}`;
-      if(!self)qs('[data-toggle]',el).onclick=async()=>{
+      el.innerHTML=`<span class="team-avatar"><i class="fa-solid fa-user"></i></span><div class="team-user-copy"><strong>${esc(row.name||row.email)}</strong><span>${esc(row.email)}</span><small>${primary?'PRIMARY ADMINISTRATOR':row.role==='admin'?'ADMINISTRATOR':'SALESPERSON'} · ${active?'ACTIVE':'DISABLED'}</small></div>${primary?'<span class="team-self">Protected</span>':self?'<span class="team-self">You</span>':`<div class="team-actions"><button type="button" data-toggle title="${active?'Disable':'Enable'} access"><i class="fa-solid ${active?'fa-user-slash':'fa-user-check'}"></i></button></div>`}`;
+      if(!self&&!primary)qs('[data-toggle]',el).onclick=async()=>{
         try{await setDoc(doc(db,'salesInvites',row.email),{name:row.name,email:row.email,role:row.role||'sales',active:!active,updatedAt:serverTimestamp()},{merge:true});await loadSalesTeam();toast('Team access updated');}catch(err){toast(err.message);}
       };
       list.appendChild(el);

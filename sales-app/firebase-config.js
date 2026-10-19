@@ -11,5 +11,5 @@ export const firebaseConfig = {
 export const salesAppConfig = {
   storeName: 'Pulse Tiles',
   departmentName: 'Tiles, Bathrooms & Kitchens',
-  adminEmail: '' // Also replace REPLACE_WITH_PULSE_ADMIN_EMAIL in firestore.rules.
+  adminEmail: 'moyanamoses006@icloud.com' // Primary administrator; also configured in firestore.rules.
 };

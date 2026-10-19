@@ -2,7 +2,7 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     function signed() { return request.auth != null; }
-    function owner() { return signed() && request.auth.token.email == 'REPLACE_WITH_PULSE_ADMIN_EMAIL'; }
+    function owner() { return signed() && request.auth.token.email == 'moyanamoses006@icloud.com'; }
     function approval() { return get(/databases/$(database)/documents/salesInvites/$(request.auth.token.email)).data; }
     function member() { return signed() && exists(/databases/$(database)/documents/salesInvites/$(request.auth.token.email)) && approval().active == true && approval().role in ['sales','admin']; }
     function approved() { return owner() || member(); }
@@ -13,8 +13,8 @@ service cloud.firestore {
 
     match /salesInvites/{email} {
       allow read: if admin() || (signed() && email == request.auth.token.email);
-      allow create, delete: if admin();
-      allow update: if admin() || (member() && email == request.auth.token.email && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['uid','linked','lastLogin','lastActive','lastDevice','updatedAt']) && request.resource.data.uid == request.auth.uid);
+      allow create, delete: if admin() && email != 'moyanamoses006@icloud.com';
+      allow update: if (admin() && email != 'moyanamoses006@icloud.com') || (member() && email == request.auth.token.email && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['uid','linked','lastLogin','lastActive','lastDevice','updatedAt']) && request.resource.data.uid == request.auth.uid);
     }
     match /salesUsers/{uid} {
       allow read: if admin() || (signed() && uid == request.auth.uid);

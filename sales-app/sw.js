@@ -1,5 +1,5 @@
 const APP=new URL('./',self.location.href),ROOT=new URL('../',self.location.href);
-const PREFIX='pulse-github-'+APP.pathname+'-',CACHE=PREFIX+'v1.1.0';
+const PREFIX='pulse-github-'+APP.pathname+'-',CACHE=PREFIX+'v1.1.1';
 const FILES=['./','./index.html','./styles.css','./app.js','./pulse-storage.js','./firebase-config.js','./logo.png','./manifest.webmanifest','./app-version.json','./icons/icon-192.png','./icons/icon-512.png','./vendor/html5-qrcode.min.js','./vendor/jspdf.umd.min.js','./vendor/fontawesome/css/all.min.css','./vendor/fontawesome/webfonts/fa-solid-900.woff2','./vendor/fontawesome/webfonts/fa-regular-400.woff2','./vendor/fontawesome/webfonts/fa-brands-400.woff2','./data/sanitary-products.json','../data/pulse-tile-catalogue.json','../data/pulse-bathroom-catalogue.json','../data/pulse-kitchen-catalogue.json','../data/pulse-combo-catalogue.json'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES.map(p=>new URL(p,APP).href))).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith(PREFIX)&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));

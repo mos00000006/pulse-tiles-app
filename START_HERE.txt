@@ -1,5 +1,5 @@
 PULSE TILES SALES APP — GITHUB PAGES EDITION
-Version 1.1.0 | 18 October 2026
+Version 1.1.1 | 19 October 2026
 
 The Pulse logo is transparent throughout the app, welcome screen, install
 icons and quotation PDF. No white logo panels are used.
@@ -29,6 +29,9 @@ PDF and CSV exports for copies. Clearing the site's browser data removes
 the device records.
 
 SHARED STAFF LOGINS AND RECORDS
+Primary administrator: moyanamoses006@icloud.com
+This email is configured in the app and access rules; its Firebase login
+account still needs to be created as described in FIREBASE_SETUP.txt.
 Firebase support is included for email/password staff sign-in, approved
 sales/admin roles, shared cloud records and team dashboards.
 Follow FIREBASE_SETUP.txt to connect a separate Pulse Firebase project.
