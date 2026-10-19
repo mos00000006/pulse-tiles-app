@@ -21,7 +21,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
-  <link rel="stylesheet" href="styles.css?v=125-hardware-layout">
+  <link rel="stylesheet" href="styles.css?v=20261019-decor1">
 </head>
 <body>
   <div id="pulse-welcome" class="pulse-welcome" aria-hidden="true">
@@ -96,7 +96,7 @@
       <span id="network-status" class="system-pill online"><i class="fa-solid fa-wifi"></i><span>Online</span></span>
       <span id="cloud-status" class="system-pill cloud ready"><i class="fa-solid fa-cloud"></i><span>Checking storage…</span></span>
       <span class="system-info"><i class="fa-solid fa-clock-rotate-left"></i> Latest catalogue update: <strong id="catalogue-updated">Loading…</strong></span>
-      <span id="app-version" class="version-chip">v1.2.5</span>
+      <span id="app-version" class="version-chip">v1.2.0</span>
     </div>
 
     <main>
@@ -123,7 +123,6 @@
             <button class="filter-chip" data-filter="sanitary" type="button"><i class="fa-solid fa-bath"></i> Bathrooms</button>
             <button class="filter-chip" data-filter="kitchen" type="button"><i class="fa-solid fa-kitchen-set"></i> Kitchens</button>
             <button id="decor-catalogue-filter" class="filter-chip" data-filter="decor" type="button"><i class="fa-solid fa-palette"></i> Décor</button>
-            <button id="hardware-catalogue-filter" class="filter-chip" data-filter="hardware" type="button"><i class="fa-solid fa-screwdriver-wrench"></i> Hardware <span id="hardware-count"></span></button>
             <button class="filter-chip" data-filter="combo" type="button">Combo Deals</button>
             <button class="filter-chip" data-filter="favourites" type="button"><i class="fa-solid fa-star"></i> Favourites</button>
           </div>
@@ -158,18 +157,6 @@
             <button class="decor-filter-chip" data-decor-filter="mosaic-fix" type="button">Mosaic Fix Adhesives</button>
             <button class="decor-filter-chip" data-decor-filter="silicones-flex-adhesives" type="button">Silicones &amp; Flex Adhesives</button>
             <button class="decor-filter-chip" data-decor-filter="tile-edges-trims" type="button">Edging &amp; Skirting</button>
-          </div>
-          <div id="hardware-filter-row" class="decor-filter-row" hidden aria-label="Hardware categories">
-            <span class="decor-filter-label">PULSE HARDWARE</span>
-            <button class="hardware-filter-chip decor-filter-chip active" data-hardware-filter="all" type="button">All Hardware</button>
-            <button class="hardware-filter-chip decor-filter-chip" data-hardware-filter="tools" type="button">Tools</button>
-            <button class="hardware-filter-chip decor-filter-chip" data-hardware-filter="electrical" type="button">Electrical</button>
-            <button class="hardware-filter-chip decor-filter-chip" data-hardware-filter="paints" type="button">Paints</button>
-            <button class="hardware-filter-chip decor-filter-chip" data-hardware-filter="lighting" type="button">Lighting</button>
-            <button class="hardware-filter-chip decor-filter-chip" data-hardware-filter="consumables" type="button">Consumables</button>
-            <button class="hardware-filter-chip decor-filter-chip" data-hardware-filter="ladders" type="button">Ladders</button>
-            <button class="hardware-filter-chip decor-filter-chip" data-hardware-filter="trolleys" type="button">Trolleys</button>
-            <button class="hardware-filter-chip decor-filter-chip" data-hardware-filter="plumbing" type="button">Plumbing</button>
           </div>
         </div>
         <section id="recent-products" class="recent-products" hidden><div class="mini-section-head"><div><small>QUICK ACCESS</small><strong>Recently viewed</strong></div></div><div id="recent-products-list" class="recent-products-list"></div></section>
@@ -438,7 +425,7 @@
 
   <div id="account-menu" class="account-menu" hidden>
     <strong id="menu-email"></strong><span id="menu-role">Tiles, Bathrooms, Kitchens &amp; Décor Sales</span>
-    <span id="menu-version" class="menu-version">Version 1.2.5</span>
+    <span id="menu-version" class="menu-version">Version 1.2.0</span>
     <button id="my-dashboard-menu-btn" type="button"><i class="fa-solid fa-chart-simple"></i> My Dashboard</button>
     <button id="customers-menu-btn" type="button"><i class="fa-solid fa-address-book"></i> Customers</button>
     <button id="combo-builder-menu-btn" type="button"><i class="fa-solid fa-boxes-stacked"></i> Combo Builder</button>
@@ -456,6 +443,6 @@
 
   <script src="vendor/html5-qrcode.min.js"></script>
   <script src="vendor/jspdf.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script type="module" src="app.js?v=126-hardware-photos"></script>
+  <script type="module" src="app.js?v=20261019-decor1"></script>
 </body>
 </html>

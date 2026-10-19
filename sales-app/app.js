@@ -1,9 +1,7 @@
-import { storageMode, deviceSession, rememberedDeviceName, watchCloudSession, signIn, signOut, resetPassword, createTeamMember, checkConnection } from './pulse-storage.js?v=124-20261019';
-import { doc, getDoc, setDoc, collection, getDocs, updateDoc, deleteDoc, query, where, serverTimestamp } from './pulse-storage.js?v=124-20261019';
-import { salesAppConfig } from './firebase-config.js?v=124-20261019';
-import { mergeDecorCatalogue, decorFilterMatch } from './decor-catalogue.js?v=124-20261019';
-import { mergeHardwareCatalogue, hardwareFilterMatch } from './hardware-catalogue.js?v=126-20261019';
-import { hydrateHardwareCards, lookupHardwareImage } from './hardware-images.js?v=126-20261019';
+import { storageMode, deviceSession, rememberedDeviceName, watchCloudSession, signIn, signOut, resetPassword, createTeamMember, checkConnection } from './pulse-storage.js?v=20261019-decor1';
+import { doc, getDoc, setDoc, collection, getDocs, updateDoc, deleteDoc, query, where, serverTimestamp } from './pulse-storage.js?v=20261019-decor1';
+import { salesAppConfig } from './firebase-config.js?v=20261019-decor1';
+import { mergeDecorCatalogue, decorFilterMatch } from './decor-catalogue.js?v=20261019-decor1';
 
 
 const $ = (id) => document.getElementById(id);
@@ -31,7 +29,7 @@ let quoteHistory = loadQuoteHistory();
 let currentQuoteNumber = '';
 let currentQuoteSavedId = '';
 let smartMeasureState={productKey:'',area:0,boxes:0,cover:0,total:0,baseArea:0,wastePct:0,layout:'straight'};
-const CURRENT_APP_VERSION='1.2.6';
+const CURRENT_APP_VERSION='1.2.0';
 const PRIMARY_ADMIN_EMAIL=salesAppConfig.adminEmail.trim().toLowerCase();
 let catalogueUpdatedAt=null;
 let cloudQuotes=[];
@@ -157,7 +155,6 @@ async function checkAppVersion(){
     const menu=$('menu-version');
     if(current)current.textContent='v'+CURRENT_APP_VERSION;
     if(menu)menu.textContent='Version '+CURRENT_APP_VERSION;
-    if(version === CURRENT_APP_VERSION){const banner=$('app-update-banner');if(banner)banner.hidden=true;}
     if(version && version!==CURRENT_APP_VERSION){
       const banner=$('app-update-banner');
       if(banner){
@@ -172,27 +169,15 @@ async function forceAppUpdate(){
   if(btn){btn.disabled=true;btn.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Updating…';}
   try{
     if('serviceWorker' in navigator){
-      const registrations=await navigator.serviceWorker.getRegistrations();
-      for(const registration of registrations){
-        // Remove only service workers controlling this application's directory.
-        if(new URL(registration.scope).pathname.startsWith(new URL('./',location.href).pathname))
-          await registration.unregister();
-      }
+      const regs=await navigator.serviceWorker.getRegistrations();
+      await Promise.all(regs.map(r=>r.update().catch(()=>{})));
     }
     if('caches' in window){
       const keys=await caches.keys();
-      const prefix='pulse-github-'+new URL('./',location.href).pathname+'-';
-      await Promise.all(keys.filter(k=>k.startsWith(prefix)).map(k=>caches.delete(k)));
+      const prefix='pulse-github-'+new URL('./',location.href).pathname+'-';await Promise.all(keys.filter(k=>k.startsWith(prefix)).map(k=>caches.delete(k)));
     }
-    const target=new URL(location.href);
-    target.searchParams.set('pulse_updated','1.2.4');
-    // Navigation to a fresh unique URL bypasses stale document cache on the next launch.
-    location.replace(target.href);
-  }catch(error){
-    console.error('Update failed',error);
-    if(btn){btn.disabled=false;btn.textContent='Retry update';}
-    toast('Update could not finish: '+(error.message||'unknown error'));
-  }
+  }catch{}
+  window.location.reload();
 }
 function initProfessionalStatus(){
   setNetworkState();
@@ -229,7 +214,7 @@ if ('serviceWorker' in navigator) window.addEventListener('load',async()=>{
       refreshing=true;
       window.location.reload();
     });
-    const reg=await navigator.serviceWorker.register('./sw.js?v=124-20261019',{updateViaCache:'none'});
+    const reg=await navigator.serviceWorker.register('./sw.js?v=20261019-decor1',{updateViaCache:'none'});
     await reg.update();
   }catch(e){console.warn('Service worker update skipped',e);}
 });
@@ -429,25 +414,7 @@ async function loadSalesTeam(){
   }catch(err){list.textContent='Could not load the team. '+err.message;}
 }
 
-async function fetchJson(url){
-  // Support sites deployed as /sales-app/ or /hardware/ and data held at either
-  // the repository root or directly within the deployed app directory.
-  const alternatives=[url];
-  if(url.startsWith('../data/')) alternatives.push('./data/'+url.slice('../data/'.length));
-  if(url.startsWith('./data/')) alternatives.push('../data/'+url.slice('./data/'.length));
-  const failures=[];
-  for(const candidate of [...new Set(alternatives)]){
-    try{
-      const endpoint=new URL(candidate,document.baseURI);
-      const response=await fetch(endpoint.href+(endpoint.search?'&':'?')+'v='+Date.now(),{cache:'no-store'});
-      if(!response.ok){failures.push(endpoint.pathname+' (HTTP '+response.status+')');continue;}
-      const value=await response.json();
-      if(!value||!Array.isArray(value.products))throw new Error('Invalid catalogue JSON: missing products array');
-      return value;
-    }catch(error){failures.push(candidate+' ('+(error?.message||'network error')+')');}
-  }
-  throw new Error('Cannot load '+url+'. Checked: '+failures.join('; '));
-}
+async function fetchJson(url){ const r=await fetch(url+'?v='+Date.now(),{cache:'no-store'}); if(!r.ok)throw new Error(url+' '+r.status); return r.json(); }
 function normalise(p,type){
   const code=clean(p.code||p.sku||p.product_code||'');
   const pr=p.price||{};
@@ -555,40 +522,34 @@ function setKitchenFilterVisibility(show){
   row.hidden=!show;
 }
 
-function setHardwareFilterVisibility(show){const row=$('hardware-filter-row');if(row)row.hidden=!show;}
 function setDecorFilterVisibility(show){const row=$('decor-filter-row');if(row)row.hidden=!show;}
 
 async function loadCatalogue(){
   if(products.length){render();return;}
   $('catalogue-status').style.display='block';
   try{
-    const [tiles,combos,localSanitary,pulseBathrooms,pulseKitchens,pulseDecor,pulseHardware]=await Promise.allSettled([
+    const [tiles,combos,localSanitary,pulseBathrooms,pulseKitchens,pulseDecor]=await Promise.allSettled([
       fetchJson('../data/pulse-tile-catalogue.json'),
       fetchJson('../data/pulse-combo-catalogue.json'),
       fetchJson('./data/sanitary-products.json'),
       fetchJson('../data/pulse-bathroom-catalogue.json'),
       fetchJson('../data/pulse-kitchen-catalogue.json'),
-      fetchJson('../data/pulse-decor-catalogue.json'),
-      fetchJson('../data/pulse-hardware-catalogue.json')
+      fetchJson('../data/pulse-decor-catalogue.json')
     ]);
-    const datasets=[['Tiles',tiles],['Combos',combos],['Sanware',localSanitary],['Bathrooms',pulseBathrooms],['Kitchens',pulseKitchens],['Décor',pulseDecor],['Hardware',pulseHardware]];
-    const unavailable=datasets.filter(([,v])=>v.status==='rejected');
-    if(unavailable.length===datasets.length)throw new Error('All catalogues failed: '+unavailable.map(([name,v])=>name+': '+v.reason?.message).join(' | '));
+    if(tiles.status==='rejected')throw new Error('Tile catalogue is unavailable');
     const tileRows=tiles.status==='fulfilled'?(tiles.value.products||[]):[];
     const comboRows=combos.status==='fulfilled'?(combos.value.products||[]):[];
     const localSanitaryRows=localSanitary.status==='fulfilled'?(localSanitary.value.products||[]):[];
     const pulseBathroomRows=pulseBathrooms.status==='fulfilled'?(pulseBathrooms.value.products||[]):[];
     const pulseKitchenRows=pulseKitchens.status==='fulfilled'?(pulseKitchens.value.products||[]):[];
     const pulseDecorRows=pulseDecor.status==='fulfilled'?(pulseDecor.value.products||[]):[];
-    const pulseHardwareRows=pulseHardware.status==='fulfilled'?(pulseHardware.value.products||[]):[];
     updateCatalogueTimestamp([
       tiles.status==='fulfilled'?(tiles.value.prices_checked_at||tiles.value.generated_at):null,
       combos.status==='fulfilled'?(combos.value.prices_checked_at||combos.value.generated_at):null,
       localSanitary.status==='fulfilled'?(localSanitary.value.prices_checked_at||localSanitary.value.generated_at):null,
       pulseBathrooms.status==='fulfilled'?(pulseBathrooms.value.prices_checked_at||pulseBathrooms.value.generated_at):null,
       pulseKitchens.status==='fulfilled'?(pulseKitchens.value.prices_checked_at||pulseKitchens.value.generated_at):null,
-      pulseDecor.status==='fulfilled'?(pulseDecor.value.prices_checked_at||pulseDecor.value.generated_at):null,
-      pulseHardware.status==='fulfilled'?(pulseHardware.value.prices_checked_at||pulseHardware.value.generated_at):null
+      pulseDecor.status==='fulfilled'?(pulseDecor.value.prices_checked_at||pulseDecor.value.generated_at):null
     ]);
 
     products=[
@@ -599,30 +560,19 @@ async function loadCatalogue(){
       ...comboRows.map(p=>normalise(p,'combo'))
     ];
     const byKey=new Map(); products.forEach(p=>byKey.set((p._type+'|'+(p._code||p.id||p._name)).toLowerCase(),p)); products=mergeDecorCatalogue([...byKey.values()],pulseDecorRows,normalise);
-    products=mergeHardwareCatalogue(products,pulseHardwareRows,normalise);
     $('tile-count').textContent=products.filter(p=>p._type==='tile').length;
     $('sanitary-count').textContent=products.filter(p=>p._type==='sanitary').length;
     $('kitchen-count').textContent=products.filter(p=>p._type==='kitchen').length;
     $('decor-count').textContent=pulseDecor.status==='fulfilled'?products.filter(p=>decorFilterMatch(p)).length:'—';
     $('decor-catalogue-filter').disabled=pulseDecor.status!=='fulfilled';
-    $('hardware-count').textContent=pulseHardware.status==='fulfilled'?products.filter(p=>hardwareFilterMatch(p)).length:'—';
-    $('hardware-catalogue-filter').disabled=pulseHardware.status!=='fulfilled';
     $('combo-count').textContent=products.filter(p=>p._type==='combo').length;
-    if(unavailable.length){
-      const status=$('catalogue-status');
-      status.style.display='block';
-      status.innerHTML='<strong>Some catalogues could not load:</strong><p style="font-size:.85rem;overflow-wrap:anywhere"></p><button id="retry-catalogue" class="secondary-btn compact" type="button">Retry missing products</button>';
-      status.querySelector('p').textContent=unavailable.map(([name,v])=>name+': '+v.reason?.message).join(' | ');
-      $('retry-catalogue')?.addEventListener('click',()=>{products=[];loadCatalogue()});
-    }else $('catalogue-status').style.display='none';
+    $('catalogue-status').style.display='none';
     document.getElementById('catalogue-source-note')?.remove();
     const note=document.createElement('p');note.id='catalogue-source-note';note.className='catalogue-source-note';note.textContent=pulseDecor.status==='fulfilled'?'Pulse catalogue · prices subject to stock availability and final confirmation.':'Décor catalogue could not load. Reload the app to retry. Other products remain available.';$('product-grid').before(note);
     render();
     handleProductQuery();
   }catch(err){
-    $('catalogue-status').innerHTML='<i class="fa-solid fa-triangle-exclamation"></i><strong> Catalogue could not load.</strong><p style="font-size:0.85rem;overflow-wrap:anywhere"></p><button id="retry-catalogue" class="secondary-btn compact" type="button"><i class="fa-solid fa-rotate"></i> Retry catalogue</button>';
-    $('catalogue-status').querySelector('p').textContent=err?.message||'Unknown catalogue error';
-    console.error('Pulse catalogue load error:',err);
+    $('catalogue-status').innerHTML='<i class="fa-solid fa-triangle-exclamation"></i><strong> Catalogue could not load.</strong><br><button id="retry-catalogue" class="secondary-btn compact" type="button"><i class="fa-solid fa-rotate"></i> Retry catalogue</button>';
     $('retry-catalogue')?.addEventListener('click',()=>{products=[];loadCatalogue();});
   }
 }
@@ -635,37 +585,27 @@ function render(){
     else if(currentFilter==='sanitary'||currentFilter.startsWith('bathroom-'))filterOk=bathroomFilterMatch(p,currentFilter);
     else if(currentFilter==='kitchen'||currentFilter.startsWith('kitchen-'))filterOk=kitchenFilterMatch(p,currentFilter);
     else if(currentFilter==='decor'||currentFilter.startsWith('decor-'))filterOk=decorFilterMatch(p,currentFilter);
-    else if(currentFilter==='hardware'||currentFilter.startsWith('hardware-'))filterOk=hardwareFilterMatch(p,currentFilter);
     else filterOk=p._type===currentFilter;
 
     return filterOk&&(!term||p._name.toLowerCase().includes(term)||p._code.toLowerCase().includes(term));
   });
-  if(currentFilter==='hardware'||currentFilter.startsWith('hardware-'))filtered.sort((a,b)=>a._name.localeCompare(b._name));
   if(currentFilter==='decor'||currentFilter.startsWith('decor-'))filtered.sort((a,b)=>a._name.localeCompare(b._name));
   const grid=$('product-grid'); grid.innerHTML='';
   if(!filtered.length){ grid.innerHTML='<div class="status-card" style="grid-column:1/-1">No matching products found.</div>'; return; }
   const frag=document.createDocumentFragment();
   filtered.forEach(p=>{
     const key=productKey(p);
-    const card=document.createElement('article'); card.className='product-card'; if(p._type==='hardware')card.dataset.hwIndex=String(filtered.indexOf(p));
-    const isHardware=p._type==='hardware';
-    const hwGroup=(Array.isArray(p.hardware_groups)&&p.hardware_groups[0])||'tools';
-    const hwIcons={tools:'fa-screwdriver-wrench',electrical:'fa-plug',paints:'fa-paint-roller',lighting:'fa-lightbulb',consumables:'fa-toolbox',ladders:'fa-person-arrow-up-from-line',trolleys:'fa-dolly',plumbing:'fa-faucet-drip'};
-    const hwLabels={tools:'Tools',electrical:'Electrical',paints:'Paints',lighting:'Lighting',consumables:'Consumables',ladders:'Ladders',trolleys:'Trolleys',plumbing:'Plumbing'};
-    const noHardwarePhoto=isHardware&&(!p.image&&!p.images&&!p.image_url&&!p.thumbnail&&!p.featured_image);
-    const hwPlaceholder=`<div class="hardware-photo-placeholder"><i class="fa-solid ${hwIcons[hwGroup]||hwIcons.tools}" aria-hidden="true"></i><span>${hwLabels[hwGroup]||'Hardware'}</span><small>Product image pending</small></div>`;
-    card.classList.toggle('hardware-product-card',isHardware);
-    card.innerHTML=`<div class="product-image ${isHardware?'hardware-product-image':''}">
+    const card=document.createElement('article'); card.className='product-card';
+    card.innerHTML=`<div class="product-image">
       <button class="fav-btn ${isFavourite(p)?'active':''}" type="button" title="Favourite"><i class="${isFavourite(p)?'fa-solid':'fa-regular'} fa-star"></i></button>
       <label class="compare-check"><input type="checkbox" ${compareKeys.includes(key)?'checked':''}><span>Compare</span></label>
-      ${noHardwarePhoto?hwPlaceholder:`${isHardware?`<div class="hardware-photo-placeholder" hidden><i class="fa-solid ${hwIcons[hwGroup]||hwIcons.tools}"></i><span>${hwLabels[hwGroup]||'Hardware'}</span><small>Product image pending</small></div>`:''}<img loading="lazy" referrerpolicy="no-referrer" src="${esc(p._image)}" alt="${esc(p._name)}" onerror="this.onerror=null;${isHardware?`this.replaceWith(this.parentElement.querySelector('.hardware-photo-placeholder'));`:`this.src='./logo.png'`}">`}
+      <img loading="lazy" referrerpolicy="no-referrer" src="${esc(p._image)}" alt="${esc(p._name)}" onerror="this.onerror=null;this.src='./logo.png'">
     </div><div class="product-card-body"><span class="product-kind">${typeLabel(p._type)}</span><h3>${esc(p._name)}</h3><span class="card-code">CODE: ${esc(p._code||'—')}</span><div class="card-price">${productPrice(p)}${productUnitLabel(p)?'<small>'+productUnitLabel(p)+'</small>':''}</div><button class="view-btn" type="button"><i class="fa-regular fa-eye"></i> View Details</button></div>`;
     qs('.view-btn',card).onclick=()=>openProduct(p);
     qs('.fav-btn',card).onclick=e=>{e.stopPropagation();toggleFavourite(p)};
     qs('.compare-check input',card).onchange=e=>toggleCompare(key,e.target.checked);
     frag.appendChild(card);
   }); grid.appendChild(frag);
-  hydrateHardwareCards(grid,filtered);
   updateCompareTray();
 }
 function renderRecentProducts(){
@@ -704,14 +644,13 @@ function openComparison(){
 }
 function closeComparison(){$('compare-modal').classList.remove('open')}
 
-function typeLabel(t){return t==='tile'?'TILE':t==='combo'?'COMBO DEAL':t==='kitchen'?'KITCHEN':t==='decor'?'DÉCOR':t==='hardware'?'HARDWARE':'BATHROOM';}
+function typeLabel(t){return t==='tile'?'TILE':t==='combo'?'COMBO DEAL':t==='kitchen'?'KITCHEN':t==='decor'?'DÉCOR':'BATHROOM';}
 $('product-search').addEventListener('input',render);
 
 const catalogueFilterPanels=[
   {id:'bathroom',family:'sanitary',prefix:'bathroom-',key:'bathFilter'},
   {id:'kitchen',family:'kitchen',prefix:'kitchen-',key:'kitchenFilter'},
-  {id:'decor',family:'decor',prefix:'decor-',key:'decorFilter'},
-  {id:'hardware',family:'hardware',prefix:'hardware-',key:'hardwareFilter'}
+  {id:'decor',family:'decor',prefix:'decor-',key:'decorFilter'}
 ];
 function setCatalogueFilter(filter){
   currentFilter=filter;
@@ -721,7 +660,6 @@ function setCatalogueFilter(filter){
   setBathroomFilterVisibility(family==='sanitary');
   setKitchenFilterVisibility(family==='kitchen');
   setDecorFilterVisibility(family==='decor');
-  setHardwareFilterVisibility(family==='hardware');
   for(const p of catalogueFilterPanels){
     const group=family===p.family&&filter!==p.family?filter.slice(p.prefix.length):'all';
     qsa('#'+p.id+'-filter-row .'+p.id+'-filter-chip').forEach(b=>b.classList.toggle('active',b.dataset[p.key]===group));
@@ -742,9 +680,6 @@ function openProduct(p){
   $('product-title').textContent=p._name;
   $('product-code').textContent='Code: '+(p._code||'—');
   $('product-image').src=p._image;
-  if(p._type==='hardware' && !p.image && !p.images && !p.image_url){
-    lookupHardwareImage(p._name).then(url=>{if(url && selectedProduct===p){p._image=url;p.image=url;$('product-image').src=url;}});
-  }
   $('product-image').alt=p._name;
   $('product-price').innerHTML=productPrice(p)+(productUnitLabel(p)?'<small>'+productUnitLabel(p)+'</small>':'')+(p._price&&!p.price_verified_at?'<small>Snapshot · confirm price</small>':'');
   $('product-description').textContent=p._description||defaultDescription(p._type);
