@@ -1,0 +1,1751 @@
+{
+  "generated_at": "2026-10-19",
+  "prices_checked_at": "2026-10-19",
+  "source_site": "Pulse Tiles",
+  "source_page": "https://pulsetiles.co.za/hardware/",
+  "source_mode": "public-category-page-visible-product-prices",
+  "sync_complete": false,
+  "notice": "Partial first-page snapshot; product SKUs and images not verified; Paints landing page shows no sellable listings.",
+  "groups": {
+    "tools": {
+      "source_url": "https://pulsetiles.co.za/product-category/tools/",
+      "count": 16
+    },
+    "electrical": {
+      "source_url": "https://pulsetiles.co.za/product-category/electrical/",
+      "count": 16
+    },
+    "lighting": {
+      "source_url": "https://pulsetiles.co.za/product-category/lights/",
+      "count": 16
+    },
+    "consumables": {
+      "source_url": "https://pulsetiles.co.za/product-category/hardware-consumables/",
+      "count": 7
+    },
+    "ladders": {
+      "source_url": "https://pulsetiles.co.za/product-category/ladders/",
+      "count": 16
+    },
+    "trolleys": {
+      "source_url": "https://pulsetiles.co.za/product-category/trolleys/",
+      "count": 2
+    },
+    "plumbing": {
+      "source_url": "https://pulsetiles.co.za/product-category/plumbing/",
+      "count": 13
+    },
+    "paints": {
+      "source_url": "https://pulsetiles.co.za/paints/",
+      "count": 0
+    }
+  },
+  "products": [
+    {
+      "id": "pulse-hardware-tools-adjustable-wrench-12",
+      "name": "Adjustable Wrench 12″",
+      "code": "",
+      "price": {
+        "current": 184.9,
+        "regular": 184.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "tools"
+      ],
+      "categories": [
+        "tools"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/tools/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-tools-alco-red-budget-paint-roller-and-tray",
+      "name": "Alco – Red Budget Paint Roller and Tray",
+      "code": "",
+      "price": {
+        "current": 59.9,
+        "regular": 59.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "tools"
+      ],
+      "categories": [
+        "tools"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/tools/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-tools-alco-bitumen-flashband-10cm-x-2-5m-x-1mm",
+      "name": "Alco Bitumen Flashband 10cm x 2.5m x 1mm",
+      "code": "",
+      "price": {
+        "current": 99.9,
+        "regular": 99.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "tools",
+        "consumables"
+      ],
+      "categories": [
+        "tools"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/tools/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-tools-alco-bitumen-flashband-5cm-x-2-5m-x-1mm",
+      "name": "Alco Bitumen Flashband 5cm x 2.5m x 1mm",
+      "code": "",
+      "price": {
+        "current": 59.9,
+        "regular": 59.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "tools",
+        "consumables"
+      ],
+      "categories": [
+        "tools"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/tools/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-tools-alco-bitumen-flashband-5cm-x-5m-x-1-0mm",
+      "name": "Alco Bitumen Flashband 5cm x 5m x 1.0mm",
+      "code": "",
+      "price": {
+        "current": 129.9,
+        "regular": 129.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "tools",
+        "consumables"
+      ],
+      "categories": [
+        "tools"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/tools/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-tools-alco-bitumen-flashband-7-5cm-x-2-5m-x-1mm",
+      "name": "Alco Bitumen Flashband 7.5cm x 2.5m x 1mm",
+      "code": "",
+      "price": {
+        "current": 79.9,
+        "regular": 79.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "tools",
+        "consumables"
+      ],
+      "categories": [
+        "tools"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/tools/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-tools-alco-bitumen-flashband-7-5cm-x-5m-x-1-0mm",
+      "name": "Alco Bitumen Flashband 7.5cm x 5m x 1.0mm",
+      "code": "",
+      "price": {
+        "current": 149.9,
+        "regular": 149.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "tools",
+        "consumables"
+      ],
+      "categories": [
+        "tools"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/tools/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-tools-alco-lock-set-chrome-2-lever",
+      "name": "Alco Lock Set Chrome 2 Lever",
+      "code": "",
+      "price": {
+        "current": 79.9,
+        "regular": 79.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "tools"
+      ],
+      "categories": [
+        "tools"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/tools/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-tools-allen-key-set-9-piece-long",
+      "name": "Allen Key Set 9 Piece (Long)",
+      "code": "",
+      "price": {
+        "current": 94.9,
+        "regular": 94.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "tools"
+      ],
+      "categories": [
+        "tools"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/tools/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-tools-axe-800g",
+      "name": "Axe 800g",
+      "code": "",
+      "price": {
+        "current": 219.9,
+        "regular": 219.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "tools"
+      ],
+      "categories": [
+        "tools"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/tools/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-tools-bow-saw-21",
+      "name": "Bow Saw 21″",
+      "code": "",
+      "price": {
+        "current": 109.9,
+        "regular": 109.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "tools"
+      ],
+      "categories": [
+        "tools"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/tools/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-tools-bow-saw-24",
+      "name": "Bow Saw 24″",
+      "code": "",
+      "price": {
+        "current": 114.9,
+        "regular": 114.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "tools"
+      ],
+      "categories": [
+        "tools"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/tools/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-tools-bow-saw-30",
+      "name": "Bow Saw 30″",
+      "code": "",
+      "price": {
+        "current": 129.9,
+        "regular": 129.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "tools"
+      ],
+      "categories": [
+        "tools"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/tools/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-tools-carpenter-pliers-8",
+      "name": "Carpenter Pliers 8″",
+      "code": "",
+      "price": {
+        "current": 109.9,
+        "regular": 109.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "tools"
+      ],
+      "categories": [
+        "tools"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/tools/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-tools-caulking-gun-skeleton-frame",
+      "name": "Caulking Gun (Skeleton Frame)",
+      "code": "",
+      "price": {
+        "current": 57.9,
+        "regular": 57.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "tools"
+      ],
+      "categories": [
+        "tools"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/tools/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-tools-combination-pliers-insulated-6",
+      "name": "Combination Pliers (Insulated) 6″",
+      "code": "",
+      "price": {
+        "current": 119.9,
+        "regular": 119.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "tools"
+      ],
+      "categories": [
+        "tools"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/tools/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-electrical-6-way-multiplug-with-usb-power-up",
+      "name": "6 Way Multiplug with USB Power Up",
+      "code": "",
+      "price": {
+        "current": 269.9,
+        "regular": 269.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "electrical"
+      ],
+      "categories": [
+        "electrical"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/electrical/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-electrical-aus-lux-isolator-4-2-30a-silver-grey",
+      "name": "AUS Lux Isolator 4×2 30A Silver Grey",
+      "code": "",
+      "price": {
+        "current": 54.9,
+        "regular": 54.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "electrical"
+      ],
+      "categories": [
+        "electrical"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/electrical/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-electrical-aus-lux-light-switch-1-lever-silver-grey",
+      "name": "AUS Lux Light Switch 1 Lever Silver Grey",
+      "code": "",
+      "price": {
+        "current": 44.9,
+        "regular": 44.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "electrical"
+      ],
+      "categories": [
+        "electrical"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/electrical/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-electrical-aus-lux-light-switch-3-lever-silver-grey",
+      "name": "AUS Lux Light Switch 3 Lever Silver Grey",
+      "code": "",
+      "price": {
+        "current": 64.9,
+        "regular": 64.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "electrical"
+      ],
+      "categories": [
+        "electrical"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/electrical/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-electrical-aus-lux-light-switch-4-lever-silver-grey",
+      "name": "AUS Lux Light Switch 4 Lever Silver Grey",
+      "code": "",
+      "price": {
+        "current": 99.9,
+        "regular": 99.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "electrical"
+      ],
+      "categories": [
+        "electrical"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/electrical/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-electrical-aus-lux-single-socket-4-2-silver-grey",
+      "name": "AUS Lux Single Socket 4×2 Silver Grey",
+      "code": "",
+      "price": {
+        "current": 54.9,
+        "regular": 54.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "electrical"
+      ],
+      "categories": [
+        "electrical"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/electrical/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-electrical-aus-lux-single-socket-silver-grey",
+      "name": "AUS Lux Single Socket Silver Grey",
+      "code": "",
+      "price": {
+        "current": 79.9,
+        "regular": 79.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "electrical"
+      ],
+      "categories": [
+        "electrical"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/electrical/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-electrical-aus-white-light-switch-1-lever",
+      "name": "AUS White Light Switch 1 Lever",
+      "code": "",
+      "price": {
+        "current": 19.9,
+        "regular": 19.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "electrical"
+      ],
+      "categories": [
+        "electrical"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/electrical/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-electrical-aus-white-light-switch-2-lever",
+      "name": "AUS White Light Switch 2 Lever",
+      "code": "",
+      "price": {
+        "current": 29.9,
+        "regular": 29.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "electrical"
+      ],
+      "categories": [
+        "electrical"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/electrical/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-electrical-ausma-janus-coupler-pvc-black-white",
+      "name": "AUSMA Janus Coupler PVC Black White",
+      "code": "",
+      "price": {
+        "current": 29.9,
+        "regular": 29.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "electrical"
+      ],
+      "categories": [
+        "electrical"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/electrical/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-electrical-ausma-lux-isolator-4-4-60a-silver-grey",
+      "name": "AUSMA Lux Isolator 4×4 60A Silver Grey",
+      "code": "",
+      "price": {
+        "current": 99.9,
+        "regular": 99.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "electrical"
+      ],
+      "categories": [
+        "electrical"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/electrical/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-electrical-ausma-metal-silver-double-plug",
+      "name": "AUSMA Metal Silver Double Plug",
+      "code": "",
+      "price": {
+        "current": 119.9,
+        "regular": 119.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "electrical"
+      ],
+      "categories": [
+        "electrical"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/electrical/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-electrical-ausma-metal-silver-isolator-4-2",
+      "name": "AUSMA Metal Silver Isolator 4×2",
+      "code": "",
+      "price": {
+        "current": 89.9,
+        "regular": 89.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "electrical"
+      ],
+      "categories": [
+        "electrical"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/electrical/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-electrical-ausma-metal-silver-isolator-4-4",
+      "name": "AUSMA Metal Silver Isolator 4×4",
+      "code": "",
+      "price": {
+        "current": 139.9,
+        "regular": 139.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "electrical"
+      ],
+      "categories": [
+        "electrical"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/electrical/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-electrical-ausma-metal-silver-light-switch-3-lever",
+      "name": "AUSMA Metal Silver Light Switch 3 Lever",
+      "code": "",
+      "price": {
+        "current": 84.9,
+        "regular": 84.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "electrical"
+      ],
+      "categories": [
+        "electrical"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/electrical/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-electrical-ausma-metal-silver-light-switch-4-lever",
+      "name": "AUSMA Metal Silver Light Switch 4 Lever",
+      "code": "",
+      "price": {
+        "current": 99.9,
+        "regular": 99.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "electrical"
+      ],
+      "categories": [
+        "electrical"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/electrical/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-lighting-ceiling-fan-with-led-light-and-remote",
+      "name": "Ceiling Fan with LED Light and Remote",
+      "code": "",
+      "price": {
+        "current": 1699.9,
+        "regular": 1699.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "lighting"
+      ],
+      "categories": [
+        "lights"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/lights/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-lighting-ceiling-light-e27-tcl01",
+      "name": "Ceiling Light E27 TCL01",
+      "code": "",
+      "price": {
+        "current": 159.9,
+        "regular": 159.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "lighting"
+      ],
+      "categories": [
+        "lights"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/lights/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-lighting-ceiling-light-e27-tcl03",
+      "name": "Ceiling Light E27 TCL03",
+      "code": "",
+      "price": {
+        "current": 159.9,
+        "regular": 159.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "lighting"
+      ],
+      "categories": [
+        "lights"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/lights/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-lighting-ceiling-light-elegance-cl037",
+      "name": "Ceiling Light Elegance CL037",
+      "code": "",
+      "price": {
+        "current": 839.9,
+        "regular": 839.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "lighting"
+      ],
+      "categories": [
+        "lights"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/lights/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-lighting-ceiling-light-elegance-cl040",
+      "name": "Ceiling Light Elegance CL040",
+      "code": "",
+      "price": {
+        "current": 1059.9,
+        "regular": 1059.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "lighting"
+      ],
+      "categories": [
+        "lights"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/lights/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-lighting-ceiling-light-retro-cl029",
+      "name": "Ceiling Light Retro CL029",
+      "code": "",
+      "price": {
+        "current": 1189.9,
+        "regular": 1189.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "lighting"
+      ],
+      "categories": [
+        "lights"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/lights/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-lighting-ceiling-light-retro-cl031",
+      "name": "Ceiling Light Retro CL031",
+      "code": "",
+      "price": {
+        "current": 1189.9,
+        "regular": 1189.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "lighting"
+      ],
+      "categories": [
+        "lights"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/lights/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-lighting-led-ceiling-light-circle-28w",
+      "name": "LED Ceiling Light Circle 28W",
+      "code": "",
+      "price": {
+        "current": 229.9,
+        "regular": 229.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "lighting"
+      ],
+      "categories": [
+        "lights"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/lights/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-lighting-led-ceiling-light-circle-tyson-18w",
+      "name": "LED Ceiling Light Circle Tyson 18W",
+      "code": "",
+      "price": {
+        "current": 179.9,
+        "regular": 179.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "lighting"
+      ],
+      "categories": [
+        "lights"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/lights/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-lighting-led-ceiling-light-circle-tyson-24w",
+      "name": "LED Ceiling Light Circle Tyson 24W",
+      "code": "",
+      "price": {
+        "current": 209.9,
+        "regular": 209.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "lighting"
+      ],
+      "categories": [
+        "lights"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/lights/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-lighting-led-ceiling-light-crystal-design-28w",
+      "name": "LED Ceiling Light Crystal Design 28W",
+      "code": "",
+      "price": {
+        "current": 539.9,
+        "regular": 539.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "lighting"
+      ],
+      "categories": [
+        "lights"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/lights/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-lighting-led-ceiling-light-diamond-28w",
+      "name": "LED Ceiling Light Diamond 28W",
+      "code": "",
+      "price": {
+        "current": 229.9,
+        "regular": 229.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "lighting"
+      ],
+      "categories": [
+        "lights"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/lights/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-lighting-led-ceiling-light-diamond-tyson-24w",
+      "name": "LED Ceiling Light Diamond Tyson 24W",
+      "code": "",
+      "price": {
+        "current": 209.9,
+        "regular": 209.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "lighting"
+      ],
+      "categories": [
+        "lights"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/lights/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-lighting-led-ceiling-light-earth-28w",
+      "name": "LED Ceiling Light Earth 28W",
+      "code": "",
+      "price": {
+        "current": 399.9,
+        "regular": 399.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "lighting"
+      ],
+      "categories": [
+        "lights"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/lights/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-lighting-led-ceiling-light-high-diamond-28w",
+      "name": "LED Ceiling Light High Diamond 28W",
+      "code": "",
+      "price": {
+        "current": 399.9,
+        "regular": 399.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "lighting"
+      ],
+      "categories": [
+        "lights"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/lights/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-lighting-led-ceiling-light-ruyi-28w",
+      "name": "LED Ceiling Light Ruyi 28W",
+      "code": "",
+      "price": {
+        "current": 399.9,
+        "regular": 399.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "lighting"
+      ],
+      "categories": [
+        "lights"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/lights/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-consumables-door-and-window-weather-strip-white-2-pack-2x3m",
+      "name": "Door and Window Weather Strip White 2 Pack 2x3m",
+      "code": "",
+      "price": {
+        "current": 39.9,
+        "regular": 39.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "consumables"
+      ],
+      "categories": [
+        "hardware-consumables"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/hardware-consumables/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-consumables-thread-tape-alco-12mmx0-09mmx10m",
+      "name": "Thread Tape – Alco 12mmx0.09mmx10m",
+      "code": "",
+      "price": {
+        "current": 21.9,
+        "regular": 21.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "consumables"
+      ],
+      "categories": [
+        "hardware-consumables"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/hardware-consumables/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-ladders-10-step-extendable-ladder-black-and-orange",
+      "name": "10 Step Extendable Ladder Black and Orange",
+      "code": "",
+      "price": {
+        "current": 3699.9,
+        "regular": 3699.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "ladders"
+      ],
+      "categories": [
+        "ladders"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/ladders/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-ladders-13-step-extendable-ladder-black-and-orange",
+      "name": "13 Step Extendable Ladder Black and Orange",
+      "code": "",
+      "price": {
+        "current": 4299.9,
+        "regular": 4299.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "ladders"
+      ],
+      "categories": [
+        "ladders"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/ladders/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-ladders-16-step-extendable-ladder-black-and-orange",
+      "name": "16 Step Extendable Ladder Black and Orange",
+      "code": "",
+      "price": {
+        "current": 4699.9,
+        "regular": 4699.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "ladders"
+      ],
+      "categories": [
+        "ladders"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/ladders/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-ladders-2-step-black-and-red-ladder",
+      "name": "2 Step Black and Red Ladder",
+      "code": "",
+      "price": {
+        "current": 599.9,
+        "regular": 599.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "ladders"
+      ],
+      "categories": [
+        "ladders"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/ladders/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-ladders-2-step-black-ladder",
+      "name": "2 Step Black Ladder",
+      "code": "",
+      "price": {
+        "current": 599.9,
+        "regular": 599.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "ladders"
+      ],
+      "categories": [
+        "ladders"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/ladders/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-ladders-2x4-step-extendable-ladder-black-and-orange",
+      "name": "2X4 Step Extendable Ladder Black and Orange",
+      "code": "",
+      "price": {
+        "current": 1899.9,
+        "regular": 1899.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "ladders"
+      ],
+      "categories": [
+        "ladders"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/ladders/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-ladders-2x5-step-extendable-ladder-black-and-orange",
+      "name": "2X5 Step Extendable Ladder Black and Orange",
+      "code": "",
+      "price": {
+        "current": 2199.9,
+        "regular": 2199.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "ladders"
+      ],
+      "categories": [
+        "ladders"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/ladders/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-ladders-2x7-step-extendable-ladder-black-and-orange",
+      "name": "2X7 Step Extendable Ladder Black and Orange",
+      "code": "",
+      "price": {
+        "current": 2599.9,
+        "regular": 2599.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "ladders"
+      ],
+      "categories": [
+        "ladders"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/ladders/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-ladders-3-step-black-and-red-foldable-ladder",
+      "name": "3 Step Black and Red Foldable Ladder",
+      "code": "",
+      "price": {
+        "current": 999.9,
+        "regular": 999.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "ladders"
+      ],
+      "categories": [
+        "ladders"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/ladders/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-ladders-3-step-black-foldable-ladder",
+      "name": "3 Step Black Foldable Ladder",
+      "code": "",
+      "price": {
+        "current": 999.9,
+        "regular": 999.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "ladders"
+      ],
+      "categories": [
+        "ladders"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/ladders/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-ladders-3-step-multi-fold-a-shaped-ladder-red-and-black",
+      "name": "3 Step Multi-Fold A-Shaped Ladder Red and Black",
+      "code": "",
+      "price": {
+        "current": 1099.9,
+        "regular": 1099.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "ladders"
+      ],
+      "categories": [
+        "ladders"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/ladders/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-ladders-4-step-black-and-red-foldable-ladder",
+      "name": "4 Step Black and Red Foldable Ladder",
+      "code": "",
+      "price": {
+        "current": 1199.9,
+        "regular": 1199.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "ladders"
+      ],
+      "categories": [
+        "ladders"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/ladders/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-ladders-4-step-black-foldable-ladder",
+      "name": "4 Step Black Foldable Ladder",
+      "code": "",
+      "price": {
+        "current": 1199.9,
+        "regular": 1199.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "ladders"
+      ],
+      "categories": [
+        "ladders"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/ladders/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-ladders-4-step-multi-fold-a-shaped-ladder-red-and-black",
+      "name": "4 Step Multi-Fold A-Shaped Ladder Red and Black",
+      "code": "",
+      "price": {
+        "current": 1299.9,
+        "regular": 1299.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "ladders"
+      ],
+      "categories": [
+        "ladders"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/ladders/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-ladders-5-step-multi-fold-a-shaped-ladder-red-and-black",
+      "name": "5 Step Multi-Fold A-Shaped Ladder Red and Black",
+      "code": "",
+      "price": {
+        "current": 1499.9,
+        "regular": 1499.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "ladders"
+      ],
+      "categories": [
+        "ladders"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/ladders/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-ladders-6-step-multi-fold-a-shaped-ladder-red-and-black",
+      "name": "6 Step Multi-Fold A-Shaped Ladder Red and Black",
+      "code": "",
+      "price": {
+        "current": 1699.9,
+        "regular": 1699.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "ladders"
+      ],
+      "categories": [
+        "ladders"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/ladders/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-trolleys-trolly-for-boxes",
+      "name": "Trolly For Boxes",
+      "code": "",
+      "price": {
+        "current": 899.9,
+        "regular": 899.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "trolleys"
+      ],
+      "categories": [
+        "trolleys"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/trolleys/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-trolleys-trolly-for-boxes",
+      "name": "Trolly For Boxes",
+      "code": "",
+      "price": {
+        "current": 799.9,
+        "regular": 799.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "trolleys"
+      ],
+      "categories": [
+        "trolleys"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/trolleys/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-plumbing-brass-mini-lever-ball-valve-15mm",
+      "name": "Brass Mini Lever Ball Valve 15mm",
+      "code": "",
+      "price": {
+        "current": 74.9,
+        "regular": 74.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "plumbing"
+      ],
+      "categories": [
+        "plumbing"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/plumbing/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-plumbing-compress-fit-90inch-elbow-sabs-15mm",
+      "name": "Compress Fit – 90inch Elbow SABS 15mm",
+      "code": "",
+      "price": {
+        "current": 33.9,
+        "regular": 33.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "plumbing"
+      ],
+      "categories": [
+        "plumbing"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/plumbing/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-plumbing-compress-fit-female-iron-coup-sabs-15mm",
+      "name": "Compress Fit – Female Iron Coup SABS 15mm",
+      "code": "",
+      "price": {
+        "current": 27.9,
+        "regular": 27.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "plumbing"
+      ],
+      "categories": [
+        "plumbing"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/plumbing/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-plumbing-compress-fit-female-iron-coup-sabs-15mmx3-4",
+      "name": "Compress Fit – Female Iron Coup SABS 15mmx3/4",
+      "code": "",
+      "price": {
+        "current": 34.9,
+        "regular": 34.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "plumbing"
+      ],
+      "categories": [
+        "plumbing"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/plumbing/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-plumbing-compress-fit-stop-end-sabs-15mm",
+      "name": "Compress Fit – Stop End SABS 15mm",
+      "code": "",
+      "price": {
+        "current": 19.9,
+        "regular": 19.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "plumbing"
+      ],
+      "categories": [
+        "plumbing"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/plumbing/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-plumbing-compress-fit-straight-coup-sabs-15mm",
+      "name": "Compress Fit – Straight Coup SABS 15mm",
+      "code": "",
+      "price": {
+        "current": 29.9,
+        "regular": 29.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "plumbing"
+      ],
+      "categories": [
+        "plumbing"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/plumbing/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-plumbing-copper-pipe-15mm-5-5m",
+      "name": "Copper Pipe 15mm 5.5m",
+      "code": "",
+      "price": {
+        "current": 289.9,
+        "regular": 289.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "plumbing"
+      ],
+      "categories": [
+        "plumbing"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/plumbing/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-plumbing-eurofit-45-rodding-eye-new-mould-110mm",
+      "name": "Eurofit 45 Rodding Eye – New Mould 110mm",
+      "code": "",
+      "price": {
+        "current": 44.9,
+        "regular": 44.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "plumbing"
+      ],
+      "categories": [
+        "plumbing"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/plumbing/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-plumbing-eurofit-gully-head-and-grid",
+      "name": "Eurofit Gully Head and Grid",
+      "code": "",
+      "price": {
+        "current": 39.9,
+        "regular": 39.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "plumbing"
+      ],
+      "categories": [
+        "plumbing"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/plumbing/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-plumbing-hose-pipe-12mmx15m",
+      "name": "Hose Pipe 12mmx15m",
+      "code": "",
+      "price": {
+        "current": 149.9,
+        "regular": 149.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "plumbing"
+      ],
+      "categories": [
+        "plumbing"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/plumbing/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-plumbing-polycop-pipe-15mm-1m",
+      "name": "Polycop Pipe 15mm – 1m",
+      "code": "",
+      "price": {
+        "current": 7.49,
+        "regular": 7.49,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "plumbing"
+      ],
+      "categories": [
+        "plumbing"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/plumbing/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-plumbing-pressure-valve-hypaflo-400kpa-22mm",
+      "name": "Pressure Valve Hypaflo 400KPA 22mm",
+      "code": "",
+      "price": {
+        "current": 909.9,
+        "regular": 909.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "plumbing"
+      ],
+      "categories": [
+        "plumbing"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/plumbing/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    },
+    {
+      "id": "pulse-hardware-plumbing-supahot-geyser-150l-with-tp-and-dc",
+      "name": "Supahot Geyser 150L with TP and DC",
+      "code": "",
+      "price": {
+        "current": 4999.9,
+        "regular": 4999.9,
+        "currency": "ZAR"
+      },
+      "hardware_groups": [
+        "plumbing"
+      ],
+      "categories": [
+        "plumbing"
+      ],
+      "catalogue_type": "hardware",
+      "source_url": "https://pulsetiles.co.za/product-category/plumbing/",
+      "description": "Hardware product. Confirm current price and specifications before finalising quotation.",
+      "selling_unit": "Each",
+      "price_verified_at": "2026-10-19"
+    }
+  ]
+}

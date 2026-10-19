@@ -123,6 +123,7 @@
             <button class="filter-chip" data-filter="sanitary" type="button"><i class="fa-solid fa-bath"></i> Bathrooms</button>
             <button class="filter-chip" data-filter="kitchen" type="button"><i class="fa-solid fa-kitchen-set"></i> Kitchens</button>
             <button id="decor-catalogue-filter" class="filter-chip" data-filter="decor" type="button"><i class="fa-solid fa-palette"></i> Décor</button>
+            <button id="hardware-catalogue-filter" class="filter-chip" data-filter="hardware" type="button"><i class="fa-solid fa-screwdriver-wrench"></i> Hardware <span id="hardware-count"></span></button>
             <button class="filter-chip" data-filter="combo" type="button">Combo Deals</button>
             <button class="filter-chip" data-filter="favourites" type="button"><i class="fa-solid fa-star"></i> Favourites</button>
           </div>
@@ -157,6 +158,18 @@
             <button class="decor-filter-chip" data-decor-filter="mosaic-fix" type="button">Mosaic Fix Adhesives</button>
             <button class="decor-filter-chip" data-decor-filter="silicones-flex-adhesives" type="button">Silicones &amp; Flex Adhesives</button>
             <button class="decor-filter-chip" data-decor-filter="tile-edges-trims" type="button">Edging &amp; Skirting</button>
+          </div>
+          <div id="hardware-filter-row" class="decor-filter-row" hidden aria-label="Hardware categories">
+            <span class="decor-filter-label">PULSE HARDWARE</span>
+            <button class="hardware-filter-chip decor-filter-chip active" data-hardware-filter="all" type="button">All Hardware</button>
+            <button class="hardware-filter-chip decor-filter-chip" data-hardware-filter="tools" type="button">Tools</button>
+            <button class="hardware-filter-chip decor-filter-chip" data-hardware-filter="electrical" type="button">Electrical</button>
+            <button class="hardware-filter-chip decor-filter-chip" data-hardware-filter="paints" type="button">Paints</button>
+            <button class="hardware-filter-chip decor-filter-chip" data-hardware-filter="lighting" type="button">Lighting</button>
+            <button class="hardware-filter-chip decor-filter-chip" data-hardware-filter="consumables" type="button">Consumables</button>
+            <button class="hardware-filter-chip decor-filter-chip" data-hardware-filter="ladders" type="button">Ladders</button>
+            <button class="hardware-filter-chip decor-filter-chip" data-hardware-filter="trolleys" type="button">Trolleys</button>
+            <button class="hardware-filter-chip decor-filter-chip" data-hardware-filter="plumbing" type="button">Plumbing</button>
           </div>
         </div>
         <section id="recent-products" class="recent-products" hidden><div class="mini-section-head"><div><small>QUICK ACCESS</small><strong>Recently viewed</strong></div></div><div id="recent-products-list" class="recent-products-list"></div></section>
@@ -443,6 +456,6 @@
 
   <script src="vendor/html5-qrcode.min.js"></script>
   <script src="vendor/jspdf.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script type="module" src="app.js?v=20261019-decor1"></script>
+  <script type="module" src="app.js?v=20261019-hardware1"></script>
 </body>
 </html>

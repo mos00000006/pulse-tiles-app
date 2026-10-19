@@ -1,0 +1,9 @@
+PULSE TILES HARDWARE PATCH 1.2.1 — 19 October 2026
+
+Apply only the folders/files included in this ZIP to the ROOT of the existing GitHub Pages project, preserving the folder layout. Overwrite the matching files; do NOT delete any other files.
+
+Adds Hardware and eight category filters, a first-page snapshot of hardware listings with visible prices, and white-background app icons. Not a complete catalogue: further category pages, real SKUs, images and Paints items require a verified full sync. Existing catalogues, quotations, customer data and authentication are not intentionally changed.
+
+Files: data/pulse-hardware-catalogue.json; sales-app/app.js, hardware-catalogue.js, index.html, manifest.webmanifest, sw.js, app-version.json, icons/icon-192.png and icon-512.png.
+
+After upload, refresh the web app or close/reopen installed app to update its service worker.

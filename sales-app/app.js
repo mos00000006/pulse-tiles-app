@@ -2,6 +2,7 @@ import { storageMode, deviceSession, rememberedDeviceName, watchCloudSession, si
 import { doc, getDoc, setDoc, collection, getDocs, updateDoc, deleteDoc, query, where, serverTimestamp } from './pulse-storage.js?v=20261019-decor1';
 import { salesAppConfig } from './firebase-config.js?v=20261019-decor1';
 import { mergeDecorCatalogue, decorFilterMatch } from './decor-catalogue.js?v=20261019-decor1';
+import { mergeHardwareCatalogue, hardwareFilterMatch } from './hardware-catalogue.js?v=20261019-hardware1';
 
 
 const $ = (id) => document.getElementById(id);
@@ -29,7 +30,7 @@ let quoteHistory = loadQuoteHistory();
 let currentQuoteNumber = '';
 let currentQuoteSavedId = '';
 let smartMeasureState={productKey:'',area:0,boxes:0,cover:0,total:0,baseArea:0,wastePct:0,layout:'straight'};
-const CURRENT_APP_VERSION='1.2.0';
+const CURRENT_APP_VERSION='1.2.1';
 const PRIMARY_ADMIN_EMAIL=salesAppConfig.adminEmail.trim().toLowerCase();
 let catalogueUpdatedAt=null;
 let cloudQuotes=[];
@@ -522,19 +523,21 @@ function setKitchenFilterVisibility(show){
   row.hidden=!show;
 }
 
+function setHardwareFilterVisibility(show){const row=$('hardware-filter-row');if(row)row.hidden=!show;}
 function setDecorFilterVisibility(show){const row=$('decor-filter-row');if(row)row.hidden=!show;}
 
 async function loadCatalogue(){
   if(products.length){render();return;}
   $('catalogue-status').style.display='block';
   try{
-    const [tiles,combos,localSanitary,pulseBathrooms,pulseKitchens,pulseDecor]=await Promise.allSettled([
+    const [tiles,combos,localSanitary,pulseBathrooms,pulseKitchens,pulseDecor,pulseHardware]=await Promise.allSettled([
       fetchJson('../data/pulse-tile-catalogue.json'),
       fetchJson('../data/pulse-combo-catalogue.json'),
       fetchJson('./data/sanitary-products.json'),
       fetchJson('../data/pulse-bathroom-catalogue.json'),
       fetchJson('../data/pulse-kitchen-catalogue.json'),
-      fetchJson('../data/pulse-decor-catalogue.json')
+      fetchJson('../data/pulse-decor-catalogue.json'),
+      fetchJson('../data/pulse-hardware-catalogue.json')
     ]);
     if(tiles.status==='rejected')throw new Error('Tile catalogue is unavailable');
     const tileRows=tiles.status==='fulfilled'?(tiles.value.products||[]):[];
@@ -543,13 +546,15 @@ async function loadCatalogue(){
     const pulseBathroomRows=pulseBathrooms.status==='fulfilled'?(pulseBathrooms.value.products||[]):[];
     const pulseKitchenRows=pulseKitchens.status==='fulfilled'?(pulseKitchens.value.products||[]):[];
     const pulseDecorRows=pulseDecor.status==='fulfilled'?(pulseDecor.value.products||[]):[];
+    const pulseHardwareRows=pulseHardware.status==='fulfilled'?(pulseHardware.value.products||[]):[];
     updateCatalogueTimestamp([
       tiles.status==='fulfilled'?(tiles.value.prices_checked_at||tiles.value.generated_at):null,
       combos.status==='fulfilled'?(combos.value.prices_checked_at||combos.value.generated_at):null,
       localSanitary.status==='fulfilled'?(localSanitary.value.prices_checked_at||localSanitary.value.generated_at):null,
       pulseBathrooms.status==='fulfilled'?(pulseBathrooms.value.prices_checked_at||pulseBathrooms.value.generated_at):null,
       pulseKitchens.status==='fulfilled'?(pulseKitchens.value.prices_checked_at||pulseKitchens.value.generated_at):null,
-      pulseDecor.status==='fulfilled'?(pulseDecor.value.prices_checked_at||pulseDecor.value.generated_at):null
+      pulseDecor.status==='fulfilled'?(pulseDecor.value.prices_checked_at||pulseDecor.value.generated_at):null,
+      pulseHardware.status==='fulfilled'?(pulseHardware.value.prices_checked_at||pulseHardware.value.generated_at):null
     ]);
 
     products=[
@@ -560,11 +565,14 @@ async function loadCatalogue(){
       ...comboRows.map(p=>normalise(p,'combo'))
     ];
     const byKey=new Map(); products.forEach(p=>byKey.set((p._type+'|'+(p._code||p.id||p._name)).toLowerCase(),p)); products=mergeDecorCatalogue([...byKey.values()],pulseDecorRows,normalise);
+    products=mergeHardwareCatalogue(products,pulseHardwareRows,normalise);
     $('tile-count').textContent=products.filter(p=>p._type==='tile').length;
     $('sanitary-count').textContent=products.filter(p=>p._type==='sanitary').length;
     $('kitchen-count').textContent=products.filter(p=>p._type==='kitchen').length;
     $('decor-count').textContent=pulseDecor.status==='fulfilled'?products.filter(p=>decorFilterMatch(p)).length:'—';
     $('decor-catalogue-filter').disabled=pulseDecor.status!=='fulfilled';
+    $('hardware-count').textContent=pulseHardware.status==='fulfilled'?products.filter(p=>hardwareFilterMatch(p)).length:'—';
+    $('hardware-catalogue-filter').disabled=pulseHardware.status!=='fulfilled';
     $('combo-count').textContent=products.filter(p=>p._type==='combo').length;
     $('catalogue-status').style.display='none';
     document.getElementById('catalogue-source-note')?.remove();
@@ -585,10 +593,12 @@ function render(){
     else if(currentFilter==='sanitary'||currentFilter.startsWith('bathroom-'))filterOk=bathroomFilterMatch(p,currentFilter);
     else if(currentFilter==='kitchen'||currentFilter.startsWith('kitchen-'))filterOk=kitchenFilterMatch(p,currentFilter);
     else if(currentFilter==='decor'||currentFilter.startsWith('decor-'))filterOk=decorFilterMatch(p,currentFilter);
+    else if(currentFilter==='hardware'||currentFilter.startsWith('hardware-'))filterOk=hardwareFilterMatch(p,currentFilter);
     else filterOk=p._type===currentFilter;
 
     return filterOk&&(!term||p._name.toLowerCase().includes(term)||p._code.toLowerCase().includes(term));
   });
+  if(currentFilter==='hardware'||currentFilter.startsWith('hardware-'))filtered.sort((a,b)=>a._name.localeCompare(b._name));
   if(currentFilter==='decor'||currentFilter.startsWith('decor-'))filtered.sort((a,b)=>a._name.localeCompare(b._name));
   const grid=$('product-grid'); grid.innerHTML='';
   if(!filtered.length){ grid.innerHTML='<div class="status-card" style="grid-column:1/-1">No matching products found.</div>'; return; }
@@ -644,13 +654,14 @@ function openComparison(){
 }
 function closeComparison(){$('compare-modal').classList.remove('open')}
 
-function typeLabel(t){return t==='tile'?'TILE':t==='combo'?'COMBO DEAL':t==='kitchen'?'KITCHEN':t==='decor'?'DÉCOR':'BATHROOM';}
+function typeLabel(t){return t==='tile'?'TILE':t==='combo'?'COMBO DEAL':t==='kitchen'?'KITCHEN':t==='decor'?'DÉCOR':t==='hardware'?'HARDWARE':'BATHROOM';}
 $('product-search').addEventListener('input',render);
 
 const catalogueFilterPanels=[
   {id:'bathroom',family:'sanitary',prefix:'bathroom-',key:'bathFilter'},
   {id:'kitchen',family:'kitchen',prefix:'kitchen-',key:'kitchenFilter'},
-  {id:'decor',family:'decor',prefix:'decor-',key:'decorFilter'}
+  {id:'decor',family:'decor',prefix:'decor-',key:'decorFilter'},
+  {id:'hardware',family:'hardware',prefix:'hardware-',key:'hardwareFilter'}
 ];
 function setCatalogueFilter(filter){
   currentFilter=filter;
@@ -660,6 +671,7 @@ function setCatalogueFilter(filter){
   setBathroomFilterVisibility(family==='sanitary');
   setKitchenFilterVisibility(family==='kitchen');
   setDecorFilterVisibility(family==='decor');
+  setHardwareFilterVisibility(family==='hardware');
   for(const p of catalogueFilterPanels){
     const group=family===p.family&&filter!==p.family?filter.slice(p.prefix.length):'all';
     qsa('#'+p.id+'-filter-row .'+p.id+'-filter-chip').forEach(b=>b.classList.toggle('active',b.dataset[p.key]===group));
