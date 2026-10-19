@@ -2,7 +2,8 @@ import { storageMode, deviceSession, rememberedDeviceName, watchCloudSession, si
 import { doc, getDoc, setDoc, collection, getDocs, updateDoc, deleteDoc, query, where, serverTimestamp } from './pulse-storage.js?v=124-20261019';
 import { salesAppConfig } from './firebase-config.js?v=124-20261019';
 import { mergeDecorCatalogue, decorFilterMatch } from './decor-catalogue.js?v=124-20261019';
-import { mergeHardwareCatalogue, hardwareFilterMatch } from './hardware-catalogue.js?v=124-20261019';
+import { mergeHardwareCatalogue, hardwareFilterMatch } from './hardware-catalogue.js?v=126-20261019';
+import { hydrateHardwareCards, lookupHardwareImage } from './hardware-images.js?v=126-20261019';
 
 
 const $ = (id) => document.getElementById(id);
@@ -30,7 +31,7 @@ let quoteHistory = loadQuoteHistory();
 let currentQuoteNumber = '';
 let currentQuoteSavedId = '';
 let smartMeasureState={productKey:'',area:0,boxes:0,cover:0,total:0,baseArea:0,wastePct:0,layout:'straight'};
-const CURRENT_APP_VERSION='1.2.5';
+const CURRENT_APP_VERSION='1.2.6';
 const PRIMARY_ADMIN_EMAIL=salesAppConfig.adminEmail.trim().toLowerCase();
 let catalogueUpdatedAt=null;
 let cloudQuotes=[];
@@ -646,7 +647,7 @@ function render(){
   const frag=document.createDocumentFragment();
   filtered.forEach(p=>{
     const key=productKey(p);
-    const card=document.createElement('article'); card.className='product-card';
+    const card=document.createElement('article'); card.className='product-card'; if(p._type==='hardware')card.dataset.hwIndex=String(filtered.indexOf(p));
     const isHardware=p._type==='hardware';
     const hwGroup=(Array.isArray(p.hardware_groups)&&p.hardware_groups[0])||'tools';
     const hwIcons={tools:'fa-screwdriver-wrench',electrical:'fa-plug',paints:'fa-paint-roller',lighting:'fa-lightbulb',consumables:'fa-toolbox',ladders:'fa-person-arrow-up-from-line',trolleys:'fa-dolly',plumbing:'fa-faucet-drip'};
@@ -664,6 +665,7 @@ function render(){
     qs('.compare-check input',card).onchange=e=>toggleCompare(key,e.target.checked);
     frag.appendChild(card);
   }); grid.appendChild(frag);
+  hydrateHardwareCards(grid,filtered);
   updateCompareTray();
 }
 function renderRecentProducts(){
@@ -740,6 +742,9 @@ function openProduct(p){
   $('product-title').textContent=p._name;
   $('product-code').textContent='Code: '+(p._code||'—');
   $('product-image').src=p._image;
+  if(p._type==='hardware' && !p.image && !p.images && !p.image_url){
+    lookupHardwareImage(p._name).then(url=>{if(url && selectedProduct===p){p._image=url;p.image=url;$('product-image').src=url;}});
+  }
   $('product-image').alt=p._name;
   $('product-price').innerHTML=productPrice(p)+(productUnitLabel(p)?'<small>'+productUnitLabel(p)+'</small>':'')+(p._price&&!p.price_verified_at?'<small>Snapshot · confirm price</small>':'');
   $('product-description').textContent=p._description||defaultDescription(p._type);

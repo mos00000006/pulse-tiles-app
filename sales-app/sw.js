@@ -1,7 +1,7 @@
 const APP=new URL('./',self.location.href);
-const PREFIX='pulse-github-'+APP.pathname+'-', CACHE=PREFIX+'v1.2.5';
+const PREFIX='pulse-github-'+APP.pathname+'-', CACHE=PREFIX+'v1.2.6';
 // Only cache application shell assets during install. Catalogues are fetched independently.
-const FILES=['./','./index.html','./styles.css','./app.js','./pulse-storage.js','./decor-catalogue.js','./hardware-catalogue.js','./firebase-config.js','./logo.png','./manifest.webmanifest','./app-version.json','./icons/icon-192.png','./icons/icon-512.png'];
+const FILES=['./','./index.html','./styles.css','./app.js','./pulse-storage.js','./decor-catalogue.js','./hardware-catalogue.js','./hardware-images.js','./firebase-config.js','./logo.png','./manifest.webmanifest','./app-version.json','./icons/icon-192.png','./icons/icon-512.png'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>Promise.allSettled(FILES.map(item=>cache.add(new URL(item,APP).href)))).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith(PREFIX)&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',event=>{

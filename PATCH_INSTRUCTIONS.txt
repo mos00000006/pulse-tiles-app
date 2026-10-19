@@ -1,9 +1,17 @@
-PULSE TILES CATALOGUE LOADING FIX — v1.2.2
+Pulse Tiles Hardware Images – patch v1.2.6
 
-Apply the files in this ZIP over the matching files from patch v1.2.1, keeping the existing folder layout. Do not delete any product data.
+Upload these files into the existing sales-app folder in GitHub:
+  app.js
+  hardware-images.js (NEW)
+  index.html
+  app-version.json
+  sw.js
 
-IMPORTANT: the existing tile JSON is required by the app. On GitHub the project must contain data/pulse-tile-catalogue.json, data/pulse-hardware-catalogue.json and the other existing data/*.json catalogues. If your deployed app is at /hardware/, these normally resolve at https://YOUR-DOMAIN/data/*.json. This update also checks /hardware/data/*.json as a fallback.
+Do NOT delete your existing data folder or other application files.
 
-This patch corrects catalogue path fallback, makes service worker pre-cache tolerant of temporarily missing assets, and displays the exact failing path/error on the screen. Does NOT include catalogues or icons (keep those from v1.2.1).
+This patch looks up product photographs from the Pulse Tiles public WooCommerce Store API.
+Images only appear when the retailer API allows cross-origin requests AND an exact product-name match is found.
+Images remain placeholders otherwise; it does not invent or mismatch product photos.
+The site API was not independently reachable in the build environment, so image delivery is NOT verified.
 
-After deployment hard refresh Ctrl+Shift+R, or close/reopen installed PWA.
+Install the patch, wait for deployment, and hard refresh Ctrl+Shift+R.
