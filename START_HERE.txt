@@ -1,5 +1,5 @@
 PULSE TILES SALES APP — GITHUB PAGES EDITION
-Version 1.1.1 | 19 October 2026
+Version 1.1.2 | 19 October 2026
 
 The Pulse logo is transparent throughout the app, welcome screen, install
 icons and quotation PDF. No white logo panels are used.
@@ -20,22 +20,24 @@ to use the GitHub edition. It supports a normal repository subfolder URL as
 well as a custom domain.
 
 FIRST OPEN
-The catalogue is available immediately. Enter your salesperson name and
-press Open this device workspace.
+This version uses the Pulse Firebase project pulsetiles-sales-app.
+Before signing in, finish the Cloud Firestore database and access rules
+in FIREBASE_SETUP.txt. Then sign in with moyanamoses006@icloud.com and the
+password you chose in Firebase Authentication.
 
-The default device workspace saves customer records and quotations only in
-that browser on that device. It is not a shared staff login system. Use the
-PDF and CSV exports for copies. Clearing the site's browser data removes
-the device records.
+Existing device-workspace records are not automatically transferred into
+Firebase. Export those quotations/customers before replacing a device-mode
+deployment. The administrator login opens a separate cloud workspace.
 
 SHARED STAFF LOGINS AND RECORDS
 Primary administrator: moyanamoses006@icloud.com
-This email is configured in the app and access rules; its Firebase login
-account still needs to be created as described in FIREBASE_SETUP.txt.
+This email is configured in the app and access rules. The administrator
+reported creating its Firebase Authentication account on 19 October 2026.
 Firebase support is included for email/password staff sign-in, approved
 sales/admin roles, shared cloud records and team dashboards.
-Follow FIREBASE_SETUP.txt to connect a separate Pulse Firebase project.
-That project has not been created or connected in this ZIP.
+The supplied public Web App settings are already installed in this ZIP.
+Database creation, publishing the rules and configuring the GitHub hostname
+still need to be completed in Firebase. Follow FIREBASE_SETUP.txt.
 
 CATALOGUE
 1,350 catalogue entries are included:

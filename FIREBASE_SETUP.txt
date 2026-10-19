@@ -1,63 +1,71 @@
-PULSE SHARED STAFF ACCESS — OPTIONAL FIREBASE SETUP
+PULSE SHARED STAFF ACCESS — FINISH FIREBASE SETUP
+Version 1.1.2 | 19 October 2026
 
-The app works in device mode until a Pulse Firebase project is configured.
-Use a separate Pulse project so BusterBuild's accounts and records remain
-separate.
+ALREADY CONFIGURED
+  Firebase project: pulsetiles-sales-app
+  Web App: Pulse Sales App
+  Primary administrator: moyanamoses006@icloud.com
 
-1. CREATE THE PROJECT AND WEB APP
-   Open https://console.firebase.google.com/
-   Create or select the Pulse project, then register a Web App.
-   Copy its public Firebase Web App configuration into:
-     sales-app/firebase-config.js
-   Fill apiKey, authDomain, projectId, storageBucket,
-   messagingSenderId and appId from that project's settings.
-   Do not put service-account keys or passwords in these public files.
+The supplied public Web App settings are installed in
+sales-app/firebase-config.js. Email/Password authentication was shown as
+enabled, and the administrator reported creating the login account.
 
-2. PRIMARY ADMINISTRATOR — ALREADY CONFIGURED
-   moyanamoses006@icloud.com
-   This email is set in sales-app/firebase-config.js and firestore.rules.
-   It is protected from being disabled or demoted through the team screen.
-   Setting the email in these files does not create a Firebase account.
+The steps below still need to be completed in your Firebase console.
+The local package cannot create a database or publish server access rules.
 
-3. ENABLE EMAIL/PASSWORD AUTHENTICATION
-   In Firebase Authentication enable the Email/Password provider.
-   In Authentication > Users create the administrator account with that
-   email moyanamoses006@icloud.com and choose its password privately there.
-   Create this administrator account before enabling the cloud app.
-   In Authentication's authorised domains add
-   your GitHub Pages hostname, for example yourname.github.io, and any
-   custom domain that you use.
+1. CREATE THE CLOUD FIRESTORE DATABASE
+   Open:
+   https://console.firebase.google.com/project/pulsetiles-sales-app/firestore
+   Click Create database.
+   Choose Standard edition if an edition is requested, and use the
+   (default) database ID. Select the database location before confirming.
+   Start in production mode.
 
-4. CREATE FIRESTORE AND APPLY THE RULES
-   Create a Cloud Firestore database in production mode.
-   In its Rules editor paste the complete contents of firestore.rules
-   then publish those rules. The administrator email is already filled in.
+2. PUBLISH THE ACCESS RULES
+   Open the database's Rules tab.
+   Replace its rules with the COMPLETE contents of firestore.rules in this
+   ZIP, then click Publish. The administrator email is already filled in.
+   The production default denies all app access until these rules are
+   published.
 
-   The included rules restrict customers/quotations to their owner and
-   administrators, restrict staff role changes to administrators, and
-   allow approved staff to update only their own activity information.
-   Staff custom discounts are limited to 5%; administrators can approve
-   larger discounts.
+   The included rules restrict customer/quotation records to their owner
+   and administrators. Only administrators approve staff and set roles.
+   Staff discounts are limited to 5%; administrators can approve more.
+   The primary administrator is protected from team-screen changes.
 
-5. UPLOAD THE CONFIGURATION CHANGE
-   Commit the updated sales-app/firebase-config.js to GitHub and wait for
-   GitHub Pages to publish it. Open the app and use Update App from the
-   menu, or reload it with the latest version. The app switches to Firebase
-   mode when the Web App settings and administrator email are complete.
+3. AUTHORISE YOUR HOSTNAME
+   In Authentication > Settings > Authorised domains, add the hostname of
+   your GitHub Pages app, for example yourname.github.io. Enter only the
+   hostname; leave off https:// and the repository path. Add any custom
+   hostname you use as well.
 
-6. SIGN IN AND ADD STAFF
-   Sign in using the administrator account created in step 3.
+4. UPLOAD THIS UPDATED APP TO GITHUB
+   Extract the ZIP and replace the repository files with its contents.
+   Keep index.html, sales-app/ and data/ side by side at the repository root.
+   Wait for GitHub Pages to publish the update. Reload the app and check
+   that version 1.1.2 is shown. Use Update App if prompted.
+
+5. SIGN IN AS THE ADMINISTRATOR
+   Email: moyanamoses006@icloud.com
+   Password: the one you chose privately in Firebase Authentication.
+   Successful sign-in opens the Pulse sales workspace. If you see a missing
+   permissions error, check step 2 in this same project. Live login and
+   Firestore access have not been verified from this development workspace.
+
+6. ADD OTHER USERS WHEN READY
    Open the account menu > Manage Sales Team.
-   Enter the staff member's name, email, role and temporary password.
-   The staff member can then use that login on another phone or computer.
-   If the email already has an account, its existing password is unchanged.
-   Staff can use Forgot password themselves when required.
+   Enter each staff member's full name, email, role and temporary password.
+   Salesperson access is limited to their own customers and quotations.
+   Additional administrators can see team records and manage staff access.
+   Existing accounts keep their passwords when approved. Staff can use
+   Forgot password on the login screen when required.
 
 DEVICE RECORDS
-Device-mode records do not automatically become cloud records. Export any
-device quotations/customers before changing to the cloud staff workspace.
+Existing device-workspace records do not automatically become cloud records.
+Export them from your old device-mode deployment before replacing it.
 
 REFERENCE
 https://firebase.google.com/docs/web/setup
 https://firebase.google.com/docs/auth/web/password-auth
+https://firebase.google.com/docs/firestore/quickstart
 https://firebase.google.com/docs/firestore/security/get-started
