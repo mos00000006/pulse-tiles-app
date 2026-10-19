@@ -1,15 +1,9 @@
-PULSE TILES v1.2.3 PATCH - CATALOGUE + UPDATE REPAIR
+PULSE TILES CATALOGUE RECOVERY PATCH v1.2.4
 
-Upload all files in this ZIP to the ROOT OF YOUR EXISTING GITHUB REPOSITORY (not inside an extra folder). Preserve the ZIP folder structure. Replace matching files.
+1. Extract and upload the files in this ZIP to the EXACT matching locations in your EXISTING GitHub repository.
+2. Replace only those files. DO NOT remove any existing files or folders.
+3. IMPORTANT: This patch deliberately DOES NOT contain /data/ files. The original 5 catalogues and previously added hardware data should stay in /data/ on GitHub.
+4. Wait for GitHub Pages deployment. Close open app tabs; reopen at your usual URL and hard refresh Ctrl+Shift+R.
+5. If the error continues, send a screenshot of the new error text.
 
-Critical locations:
-  sales-app/index.html
-  sales-app/app.js
-  sales-app/sw.js
-  sales-app/app-version.json
-  sales-app/hardware-catalogue.js
-  data/pulse-hardware-catalogue.json
-
-Do NOT delete original files. Confirm data/pulse-tile-catalogue.json still exists alongside hardware JSON, and other data JSON files remain intact.
-
-Wait for GitHub Pages deploy. Reload with Ctrl+Shift+R, or reopen installed PWA. The Update button will clear only this app's own service worker/cache and reload. If a catalogue is missing, its name and fetch path now appear while available catalogues continue to display.
+Fix: hardware catalogue rows without codes no longer crash the catalogue merger. Products previously displayed as zero because rendering failed, not because this patch removed them.

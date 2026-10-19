@@ -1,8 +1,8 @@
-import { storageMode, deviceSession, rememberedDeviceName, watchCloudSession, signIn, signOut, resetPassword, createTeamMember, checkConnection } from './pulse-storage.js?v=123-20261019';
-import { doc, getDoc, setDoc, collection, getDocs, updateDoc, deleteDoc, query, where, serverTimestamp } from './pulse-storage.js?v=123-20261019';
-import { salesAppConfig } from './firebase-config.js?v=123-20261019';
-import { mergeDecorCatalogue, decorFilterMatch } from './decor-catalogue.js?v=123-20261019';
-import { mergeHardwareCatalogue, hardwareFilterMatch } from './hardware-catalogue.js?v=123-20261019';
+import { storageMode, deviceSession, rememberedDeviceName, watchCloudSession, signIn, signOut, resetPassword, createTeamMember, checkConnection } from './pulse-storage.js?v=124-20261019';
+import { doc, getDoc, setDoc, collection, getDocs, updateDoc, deleteDoc, query, where, serverTimestamp } from './pulse-storage.js?v=124-20261019';
+import { salesAppConfig } from './firebase-config.js?v=124-20261019';
+import { mergeDecorCatalogue, decorFilterMatch } from './decor-catalogue.js?v=124-20261019';
+import { mergeHardwareCatalogue, hardwareFilterMatch } from './hardware-catalogue.js?v=124-20261019';
 
 
 const $ = (id) => document.getElementById(id);
@@ -30,7 +30,7 @@ let quoteHistory = loadQuoteHistory();
 let currentQuoteNumber = '';
 let currentQuoteSavedId = '';
 let smartMeasureState={productKey:'',area:0,boxes:0,cover:0,total:0,baseArea:0,wastePct:0,layout:'straight'};
-const CURRENT_APP_VERSION='1.2.3';
+const CURRENT_APP_VERSION='1.2.4';
 const PRIMARY_ADMIN_EMAIL=salesAppConfig.adminEmail.trim().toLowerCase();
 let catalogueUpdatedAt=null;
 let cloudQuotes=[];
@@ -184,7 +184,7 @@ async function forceAppUpdate(){
       await Promise.all(keys.filter(k=>k.startsWith(prefix)).map(k=>caches.delete(k)));
     }
     const target=new URL(location.href);
-    target.searchParams.set('pulse_updated','1.2.3');
+    target.searchParams.set('pulse_updated','1.2.4');
     // Navigation to a fresh unique URL bypasses stale document cache on the next launch.
     location.replace(target.href);
   }catch(error){
@@ -228,7 +228,7 @@ if ('serviceWorker' in navigator) window.addEventListener('load',async()=>{
       refreshing=true;
       window.location.reload();
     });
-    const reg=await navigator.serviceWorker.register('./sw.js?v=123-20261019',{updateViaCache:'none'});
+    const reg=await navigator.serviceWorker.register('./sw.js?v=124-20261019',{updateViaCache:'none'});
     await reg.update();
   }catch(e){console.warn('Service worker update skipped',e);}
 });
