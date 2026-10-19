@@ -1,0 +1,82 @@
+{
+  "checked_at": "2026-10-18T12:33:17.427472+00:00",
+  "source": "https://pulsetiles.co.za/shop/",
+  "pages": 122,
+  "failed_pages": [],
+  "price_records": 1941,
+  "feeds": {
+    "pulse-bathroom-catalogue.json": {
+      "products": 656,
+      "prices_verified": 646,
+      "unresolved": [
+        "B04016",
+        "B03981",
+        "B04394",
+        "B03308",
+        "J00244",
+        "J00228",
+        "Q01470",
+        "Q01494",
+        "Q01174",
+        "B03559"
+      ]
+    },
+    "pulse-combo-catalogue.json": {
+      "products": 150,
+      "prices_verified": 145,
+      "unresolved": [
+        "Q01536",
+        "Q01470",
+        "Q01203",
+        "Q01494",
+        "Q01174"
+      ]
+    },
+    "pulse-kitchen-catalogue.json": {
+      "products": 67,
+      "prices_verified": 67,
+      "unresolved": []
+    },
+    "pulse-tile-catalogue.json": {
+      "products": 477,
+      "prices_verified": 467,
+      "unresolved": [
+        "A18079",
+        "A17905",
+        "A18184",
+        "A17910",
+        "A18311",
+        "C01020",
+        "A17666",
+        "G00306",
+        "A18009",
+        "T00128"
+      ]
+    }
+  },
+  "direct_price_check_at": "2026-10-18T12:37:33.251318+00:00",
+  "direct_price_issues": {
+    "https://pulsetiles.co.za/product/karoo-slate-rustic-floor-a-grade-400x400mm/": "404 Client Error: Not Found for url: https://pulsetiles.co.za/product/karoo-slate-rustic-floor-a-gra",
+    "https://pulsetiles.co.za/product/shower-rail-set-with-mirror-cabinet-combo/": "404 Client Error: Not Found for url: https://pulsetiles.co.za/product/shower-rail-set-with-mirror-ca",
+    "https://pulsetiles.co.za/product/sam-kalapana-mirror-cabinet-610x610x116mm/": "404 Client Error: Not Found for url: https://pulsetiles.co.za/product/sam-kalapana-mirror-cabinet-61",
+    "https://pulsetiles.co.za/product/dolomiti-carrara-floor-tile-600x600mm/": "404 Client Error: Not Found for url: https://pulsetiles.co.za/product/dolomiti-carrara-floor-tile-60",
+    "https://pulsetiles.co.za/product/dolomiti-alpine-crema-dark-matt-600x600mm/": "404 Client Error: Not Found for url: https://pulsetiles.co.za/product/dolomiti-alpine-crema-dark-mat",
+    "https://pulsetiles.co.za/product/shower-screen-shower-rail-combo-deal/": "404 Client Error: Not Found for url: https://pulsetiles.co.za/product/shower-screen-shower-rail-comb",
+    "https://pulsetiles.co.za/product/alco-tivona-arc-shower-mixer-with-diverter-chrome/": "404 Client Error: Not Found for url: https://pulsetiles.co.za/product/alco-tivona-arc-shower-mixer-w",
+    "https://pulsetiles.co.za/product/blossom-gris-1620-hl-1-wall-tile-super-white-300x600mm/": "404 Client Error: Not Found for url: https://pulsetiles.co.za/product/blossom-gris-1620-hl-1-wall-ti",
+    "https://pulsetiles.co.za/product/inchanga-porcelain-ceramic-mosaic-300x300x4mm/": "404 Client Error: Not Found for url: https://pulsetiles.co.za/product/inchanga-porcelain-ceramic-mos",
+    "https://pulsetiles.co.za/product/vega-wash-basin-wall-hung/": "404 Client Error: Not Found for url: https://pulsetiles.co.za/product/vega-wash-basin-wall-hung/",
+    "https://pulsetiles.co.za/product/florentino-first-grade-polished-tile-600x600/": "404 Client Error: Not Found for url: https://pulsetiles.co.za/product/florentino-first-grade-polishe",
+    "https://pulsetiles.co.za/product/laminate-flooring-trendy-ash-colour-1220x200x7mm/": "404 Client Error: Not Found for url: https://pulsetiles.co.za/product/laminate-flooring-trendy-ash-c",
+    "https://pulsetiles.co.za/product/sam-brookhill-mirror-cabinet-610x610x116mm/": "404 Client Error: Not Found for url: https://pulsetiles.co.za/product/sam-brookhill-mirror-cabinet-6",
+    "https://pulsetiles.co.za/product/top-flush-toilet-basin-pedestal-shelf-combo/": "404 Client Error: Not Found for url: https://pulsetiles.co.za/product/top-flush-toilet-basin-pedesta",
+    "https://pulsetiles.co.za/product/buffer-basin-combo/": "404 Client Error: Not Found for url: https://pulsetiles.co.za/product/buffer-basin-combo/",
+    "https://pulsetiles.co.za/product/square-stainless-steel-trim-silver-12mm/": "404 Client Error: Not Found for url: https://pulsetiles.co.za/product/square-stainless-steel-trim-si",
+    "https://pulsetiles.co.za/product/alco-basin-2/": "404 Client Error: Not Found for url: https://pulsetiles.co.za/product/alco-basin-2/",
+    "https://pulsetiles.co.za/product/alco-tivona-lux-basin-mixer-black/": "404 Client Error: Not Found for url: https://pulsetiles.co.za/product/alco-tivona-lux-basin-mixer-bl",
+    "https://pulsetiles.co.za/product/toilet-combo-2/": "404 Client Error: Not Found for url: https://pulsetiles.co.za/product/toilet-combo-2/",
+    "https://pulsetiles.co.za/product/basin-counter-top-700x460x200mm/": "404 Client Error: Not Found for url: https://pulsetiles.co.za/product/basin-counter-top-700x460x200m",
+    "https://pulsetiles.co.za/product/abstract-river-glazed-polished-porcelain-600x1200/": "404 Client Error: Not Found for url: https://pulsetiles.co.za/product/abstract-river-glazed-polished",
+    "https://pulsetiles.co.za/product/mali-nero-wall-tile-new-250x400/": "404 Client Error: Not Found for url: https://pulsetiles.co.za/product/mali-nero-wall-tile-new-250x40"
+  }
+}

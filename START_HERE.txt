@@ -1,0 +1,65 @@
+PULSE TILES SALES APP — GITHUB PAGES EDITION
+Version 1.1.0 | 18 October 2026
+
+The Pulse logo is transparent throughout the app, welcome screen, install
+icons and quotation PDF. No white logo panels are used.
+
+UPLOAD TO GITHUB
+1. Extract this ZIP first.
+2. Create a new repository, for example pulse-sales-app.
+3. Upload ALL the extracted files and folders to the repository root.
+   index.html, sales-app/ and data/ must sit beside each other.
+   Do not upload the ZIP itself as the website.
+4. In the repository open Settings > Pages.
+5. Under Build and deployment choose Deploy from a branch.
+6. Select your main branch and / (root), then Save.
+7. When GitHub shows your published address, open it.
+
+No npm installation, build command, Node server or ChatGPT account is needed
+to use the GitHub edition. It supports a normal repository subfolder URL as
+well as a custom domain.
+
+FIRST OPEN
+The catalogue is available immediately. Enter your salesperson name and
+press Open this device workspace.
+
+The default device workspace saves customer records and quotations only in
+that browser on that device. It is not a shared staff login system. Use the
+PDF and CSV exports for copies. Clearing the site's browser data removes
+the device records.
+
+SHARED STAFF LOGINS AND RECORDS
+Firebase support is included for email/password staff sign-in, approved
+sales/admin roles, shared cloud records and team dashboards.
+Follow FIREBASE_SETUP.txt to connect a separate Pulse Firebase project.
+That project has not been created or connected in this ZIP.
+
+CATALOGUE
+1,350 catalogue entries are included:
+  477 tiles and tile essentials
+  656 bathroom products
+   67 kitchen products
+  150 combo entries
+
+1,325 prices were verified on 18 October 2026. The remaining 25 entries are
+marked for confirmation or price on request. Existing Pulse product image
+links are retained, so an internet connection loads those pictures.
+
+INCLUDED SALES TOOLS
+Product search, category filters, favourites, comparison, recent products,
+camera QR/manual-code lookup, customer product links, Smart Measure, room
+planning, cart, combo builder, branded PDF estimates, customer management,
+quotation history and status tracking, dashboards and CSV exports.
+
+The app is installable on supported phones. On iPhone use Safari > Share >
+Add to Home Screen. The catalogue and app files are cached after a successful
+online visit; pictures that are hosted by Pulse still require a connection.
+
+VERIFICATION
+Static resource paths, GitHub repository subpaths, transparent logo alpha,
+catalogue counts, JavaScript syntax, device record storage and Smart Measure
+were checked. Browser/camera/PDF rendering on real devices and a live Pulse
+Firebase connection have not been tested here.
+
+Official hosting instructions:
+https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site

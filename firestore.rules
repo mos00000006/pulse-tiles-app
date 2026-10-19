@@ -1,0 +1,46 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signed() { return request.auth != null; }
+    function owner() { return signed() && request.auth.token.email == 'REPLACE_WITH_PULSE_ADMIN_EMAIL'; }
+    function approval() { return get(/databases/$(database)/documents/salesInvites/$(request.auth.token.email)).data; }
+    function member() { return signed() && exists(/databases/$(database)/documents/salesInvites/$(request.auth.token.email)) && approval().active == true && approval().role in ['sales','admin']; }
+    function approved() { return owner() || member(); }
+    function admin() { return owner() || (member() && approval().role == 'admin'); }
+    function own(data) { return approved() && data.ownerUid == request.auth.uid; }
+    function keepOwner() { return request.resource.data.ownerUid == resource.data.ownerUid; }
+    function validQuote() { return request.resource.data.total is number && request.resource.data.total >= 0 && request.resource.data.discountPct is number && request.resource.data.discountPct >= 0 && request.resource.data.discountPct <= (admin() ? 100 : 5); }
+
+    match /salesInvites/{email} {
+      allow read: if admin() || (signed() && email == request.auth.token.email);
+      allow create, delete: if admin();
+      allow update: if admin() || (member() && email == request.auth.token.email && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['uid','linked','lastLogin','lastActive','lastDevice','updatedAt']) && request.resource.data.uid == request.auth.uid);
+    }
+    match /salesUsers/{uid} {
+      allow read: if admin() || (signed() && uid == request.auth.uid);
+      allow create, update: if admin() || (member() && uid == request.auth.uid && request.resource.data.email == request.auth.token.email && request.resource.data.role == approval().role && request.resource.data.active == true);
+      allow delete: if admin();
+    }
+    match /customers/{id} {
+      allow read: if admin() || own(resource.data);
+      allow create: if approved() && request.resource.data.ownerUid == request.auth.uid;
+      allow update: if (admin() || own(resource.data)) && keepOwner();
+      allow delete: if admin() || own(resource.data);
+    }
+    match /quotations/{id} {
+      allow read: if admin() || own(resource.data);
+      allow create: if approved() && request.resource.data.ownerUid == request.auth.uid && validQuote();
+      allow update: if (admin() || own(resource.data)) && keepOwner() && validQuote();
+      allow delete: if admin() || own(resource.data);
+    }
+    match /sessions/{uid} {
+      allow read: if admin() || (approved() && uid == request.auth.uid);
+      allow create, update: if approved() && uid == request.auth.uid;
+    }
+    match /auditLogs/{id} {
+      allow read: if admin();
+      allow create: if approved() && request.resource.data.ownerUid == request.auth.uid;
+    }
+    match /{document=**} { allow read, write: if false; }
+  }
+}

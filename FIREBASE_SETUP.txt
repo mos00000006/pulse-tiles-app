@@ -1,0 +1,61 @@
+PULSE SHARED STAFF ACCESS — OPTIONAL FIREBASE SETUP
+
+The app works in device mode until a Pulse Firebase project is configured.
+Use a separate Pulse project so BusterBuild's accounts and records remain
+separate.
+
+1. CREATE THE PROJECT AND WEB APP
+   Open https://console.firebase.google.com/
+   Create or select the Pulse project, then register a Web App.
+   Copy its public Firebase Web App configuration into:
+     sales-app/firebase-config.js
+   Fill apiKey, authDomain, projectId, storageBucket,
+   messagingSenderId and appId from that project's settings.
+   Do not put service-account keys or passwords in these public files.
+
+2. SET THE ADMINISTRATOR EMAIL
+   In sales-app/firebase-config.js set salesAppConfig.adminEmail to the
+   lowercase email address that will own the Pulse sales app.
+   In firestore.rules replace REPLACE_WITH_PULSE_ADMIN_EMAIL with the same
+   lowercase address. This must match the administrator's Firebase account.
+
+3. ENABLE EMAIL/PASSWORD AUTHENTICATION
+   In Firebase Authentication enable the Email/Password provider.
+   In Authentication > Users create the administrator account with that
+   exact email and a password. In Authentication's authorised domains add
+   your GitHub Pages hostname, for example yourname.github.io, and any
+   custom domain that you use.
+
+4. CREATE FIRESTORE AND APPLY THE RULES
+   Create a Cloud Firestore database in production mode.
+   In its Rules editor paste the complete contents of firestore.rules
+   after replacing the administrator email, then publish those rules.
+
+   The included rules restrict customers/quotations to their owner and
+   administrators, restrict staff role changes to administrators, and
+   allow approved staff to update only their own activity information.
+   Staff custom discounts are limited to 5%; administrators can approve
+   larger discounts.
+
+5. UPLOAD THE CONFIGURATION CHANGE
+   Commit the updated sales-app/firebase-config.js to GitHub and wait for
+   GitHub Pages to publish it. Open the app and use Update App from the
+   menu, or reload it with the latest version. The app switches to Firebase
+   mode when the Web App settings and administrator email are complete.
+
+6. SIGN IN AND ADD STAFF
+   Sign in using the administrator account created in step 3.
+   Open the account menu > Manage Sales Team.
+   Enter the staff member's name, email, role and temporary password.
+   The staff member can then use that login on another phone or computer.
+   If the email already has an account, its existing password is unchanged.
+   Staff can use Forgot password themselves when required.
+
+DEVICE RECORDS
+Device-mode records do not automatically become cloud records. Export any
+device quotations/customers before changing to the cloud staff workspace.
+
+REFERENCE
+https://firebase.google.com/docs/web/setup
+https://firebase.google.com/docs/auth/web/password-auth
+https://firebase.google.com/docs/firestore/security/get-started
