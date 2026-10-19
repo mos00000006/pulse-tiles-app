@@ -415,7 +415,23 @@ async function loadSalesTeam(){
   }catch(err){list.textContent='Could not load the team. '+err.message;}
 }
 
-async function fetchJson(url){ const r=await fetch(url+'?v='+Date.now(),{cache:'no-store'}); if(!r.ok)throw new Error(url+' '+r.status); return r.json(); }
+async function fetchJson(url){
+  // Support sites deployed as /sales-app/ or /hardware/ and data held at either
+  // the repository root or directly within the deployed app directory.
+  const alternatives=[url];
+  if(url.startsWith('../data/')) alternatives.push('./data/'+url.slice('../data/'.length));
+  if(url.startsWith('./data/')) alternatives.push('../data/'+url.slice('./data/'.length));
+  const failures=[];
+  for(const candidate of [...new Set(alternatives)]){
+    try{
+      const endpoint=new URL(candidate,document.baseURI);
+      const response=await fetch(endpoint.href+(endpoint.search?'&':'?')+'v='+Date.now(),{cache:'no-store'});
+      if(!response.ok){failures.push(endpoint.pathname+' (HTTP '+response.status+')');continue;}
+      return await response.json();
+    }catch(error){failures.push(candidate+' ('+(error?.message||'network error')+')');}
+  }
+  throw new Error('Cannot load '+url+'. Checked: '+failures.join('; '));
+}
 function normalise(p,type){
   const code=clean(p.code||p.sku||p.product_code||'');
   const pr=p.price||{};
@@ -539,7 +555,7 @@ async function loadCatalogue(){
       fetchJson('../data/pulse-decor-catalogue.json'),
       fetchJson('../data/pulse-hardware-catalogue.json')
     ]);
-    if(tiles.status==='rejected')throw new Error('Tile catalogue is unavailable');
+    if(tiles.status==='rejected')throw new Error('Main tile catalogue unavailable: '+(tiles.reason?.message||'check the data folder'));
     const tileRows=tiles.status==='fulfilled'?(tiles.value.products||[]):[];
     const comboRows=combos.status==='fulfilled'?(combos.value.products||[]):[];
     const localSanitaryRows=localSanitary.status==='fulfilled'?(localSanitary.value.products||[]):[];
@@ -580,7 +596,9 @@ async function loadCatalogue(){
     render();
     handleProductQuery();
   }catch(err){
-    $('catalogue-status').innerHTML='<i class="fa-solid fa-triangle-exclamation"></i><strong> Catalogue could not load.</strong><br><button id="retry-catalogue" class="secondary-btn compact" type="button"><i class="fa-solid fa-rotate"></i> Retry catalogue</button>';
+    $('catalogue-status').innerHTML='<i class="fa-solid fa-triangle-exclamation"></i><strong> Catalogue could not load.</strong><p style="font-size:0.85rem;overflow-wrap:anywhere"></p><button id="retry-catalogue" class="secondary-btn compact" type="button"><i class="fa-solid fa-rotate"></i> Retry catalogue</button>';
+    $('catalogue-status').querySelector('p').textContent=err?.message||'Unknown catalogue error';
+    console.error('Pulse catalogue load error:',err);
     $('retry-catalogue')?.addEventListener('click',()=>{products=[];loadCatalogue();});
   }
 }
