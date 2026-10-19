@@ -52,6 +52,14 @@
         "A18009",
         "T00128"
       ]
+    },
+    "pulse-decor-catalogue.json": {
+      "products": 262,
+      "parent_products": 207,
+      "individual_blind_sizes": 66,
+      "prices_verified": 262,
+      "unresolved": [],
+      "source": "https://pulsetiles.co.za/decor-category-page/"
     }
   },
   "direct_price_check_at": "2026-10-18T12:37:33.251318+00:00",
@@ -78,5 +86,13 @@
     "https://pulsetiles.co.za/product/basin-counter-top-700x460x200mm/": "404 Client Error: Not Found for url: https://pulsetiles.co.za/product/basin-counter-top-700x460x200m",
     "https://pulsetiles.co.za/product/abstract-river-glazed-polished-porcelain-600x1200/": "404 Client Error: Not Found for url: https://pulsetiles.co.za/product/abstract-river-glazed-polished",
     "https://pulsetiles.co.za/product/mali-nero-wall-tile-new-250x400/": "404 Client Error: Not Found for url: https://pulsetiles.co.za/product/mali-nero-wall-tile-new-250x40"
+  },
+  "decor_checked_at": "2026-10-19T09:44:34.094585+00:00",
+  "combined_catalogue": {
+    "total_cards": 1453,
+    "decor_cards": 262,
+    "verified_prices": 1428,
+    "confirm_snapshot": 9,
+    "price_on_request": 16
   }
 }

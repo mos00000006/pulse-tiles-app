@@ -1,6 +1,7 @@
-import { storageMode, deviceSession, rememberedDeviceName, watchCloudSession, signIn, signOut, resetPassword, createTeamMember, checkConnection } from './pulse-storage.js?v=20261019-firebase1';
-import { doc, getDoc, setDoc, collection, getDocs, updateDoc, deleteDoc, query, where, serverTimestamp } from './pulse-storage.js?v=20261019-firebase1';
-import { salesAppConfig } from './firebase-config.js?v=20261019-firebase1';
+import { storageMode, deviceSession, rememberedDeviceName, watchCloudSession, signIn, signOut, resetPassword, createTeamMember, checkConnection } from './pulse-storage.js?v=20261019-decor1';
+import { doc, getDoc, setDoc, collection, getDocs, updateDoc, deleteDoc, query, where, serverTimestamp } from './pulse-storage.js?v=20261019-decor1';
+import { salesAppConfig } from './firebase-config.js?v=20261019-decor1';
+import { mergeDecorCatalogue, decorFilterMatch } from './decor-catalogue.js?v=20261019-decor1';
 
 
 const $ = (id) => document.getElementById(id);
@@ -28,7 +29,7 @@ let quoteHistory = loadQuoteHistory();
 let currentQuoteNumber = '';
 let currentQuoteSavedId = '';
 let smartMeasureState={productKey:'',area:0,boxes:0,cover:0,total:0,baseArea:0,wastePct:0,layout:'straight'};
-const CURRENT_APP_VERSION='1.1.2';
+const CURRENT_APP_VERSION='1.2.0';
 const PRIMARY_ADMIN_EMAIL=salesAppConfig.adminEmail.trim().toLowerCase();
 let catalogueUpdatedAt=null;
 let cloudQuotes=[];
@@ -213,7 +214,7 @@ if ('serviceWorker' in navigator) window.addEventListener('load',async()=>{
       refreshing=true;
       window.location.reload();
     });
-    const reg=await navigator.serviceWorker.register('./sw.js?v=20261019-firebase1',{updateViaCache:'none'});
+    const reg=await navigator.serviceWorker.register('./sw.js?v=20261019-decor1',{updateViaCache:'none'});
     await reg.update();
   }catch(e){console.warn('Service worker update skipped',e);}
 });
@@ -449,7 +450,18 @@ function attrValue(attrs,re){ const a=attrs.find(x=>re.test(x.name)); return a?.
 function firstNumber(v){ const m=String(v||'').replace(',','.').match(/\d+(?:\.\d+)?/); return m?Number(m[0]):0; }
 function sqmPerBox(p,attrs){ let v=attrValue(attrs,/square\s*(meters?|metres?)\s*per\s*box|m²\s*per\s*box|sqm\s*per\s*box/i); if(!v){ const d=clean(p.description||p.short_description||''); const m=d.match(/(\d+(?:[.,]\d+)?)\s*m(?:²|2)\s*per\s*box/i)||d.match(/square\s*(?:meters?|metres?)\s*per\s*box\s*[:\-]?\s*(\d+(?:[.,]\d+)?)/i); if(m)v=m[1]; } return firstNumber(v); }
 function tilesPerBox(p,attrs){ let v=attrValue(attrs,/quantity\s*per\s*box|tiles?\s*per\s*box/i); if(!v){ const d=clean(p.description||''); const m=d.match(/quantity\s*per\s*box\s*[:\-]?\s*(\d+)/i)||d.match(/(\d+)\s*tiles?\s*per\s*box/i); if(m)v=m[1]; } return firstNumber(v); }
-function isPerSqm(p){ if(p._type!=='tile')return false; const sold=attrValue(p._attrs,/^sold$|unit|selling\s*unit/i); return /m2|m²|sqm|square/i.test(sold)||p._sqm>0; }
+function isPerSqm(p){ const sold=attrValue(p._attrs||[],/^sold$|unit|selling\s*unit/i)||p.selling_unit||''; if(sold)return /m2|m²|sqm|square/i.test(sold); return p._type==='tile'&&p._sqm>0; }
+function productUnitLabel(p){
+  if(isPerSqm(p))return 'per m²';
+  if(!decorFilterMatch(p))return '';
+  const sold=String(attrValue(p._attrs||[],/^sold$|unit|selling\s*unit/i)||p.selling_unit||'').toLowerCase();
+  if(/sheet/.test(sold))return 'per sheet';
+  if(/panel/.test(sold))return 'per panel';
+  if(/box/.test(sold))return 'per box';
+  if(/roll/.test(sold))return 'per roll';
+  if(/length/.test(sold))return 'per length';
+  return p._type==='decor'||/each|unit/.test(sold)?'each':'';
+}
 
 function inferBathroomGroups(p){
   const explicit=Array.isArray(p.bathroom_groups)?p.bathroom_groups:[];
@@ -510,16 +522,19 @@ function setKitchenFilterVisibility(show){
   row.hidden=!show;
 }
 
+function setDecorFilterVisibility(show){const row=$('decor-filter-row');if(row)row.hidden=!show;}
+
 async function loadCatalogue(){
   if(products.length){render();return;}
   $('catalogue-status').style.display='block';
   try{
-    const [tiles,combos,localSanitary,pulseBathrooms,pulseKitchens]=await Promise.allSettled([
+    const [tiles,combos,localSanitary,pulseBathrooms,pulseKitchens,pulseDecor]=await Promise.allSettled([
       fetchJson('../data/pulse-tile-catalogue.json'),
       fetchJson('../data/pulse-combo-catalogue.json'),
       fetchJson('./data/sanitary-products.json'),
       fetchJson('../data/pulse-bathroom-catalogue.json'),
-      fetchJson('../data/pulse-kitchen-catalogue.json')
+      fetchJson('../data/pulse-kitchen-catalogue.json'),
+      fetchJson('../data/pulse-decor-catalogue.json')
     ]);
     if(tiles.status==='rejected')throw new Error('Tile catalogue is unavailable');
     const tileRows=tiles.status==='fulfilled'?(tiles.value.products||[]):[];
@@ -527,12 +542,14 @@ async function loadCatalogue(){
     const localSanitaryRows=localSanitary.status==='fulfilled'?(localSanitary.value.products||[]):[];
     const pulseBathroomRows=pulseBathrooms.status==='fulfilled'?(pulseBathrooms.value.products||[]):[];
     const pulseKitchenRows=pulseKitchens.status==='fulfilled'?(pulseKitchens.value.products||[]):[];
+    const pulseDecorRows=pulseDecor.status==='fulfilled'?(pulseDecor.value.products||[]):[];
     updateCatalogueTimestamp([
       tiles.status==='fulfilled'?(tiles.value.prices_checked_at||tiles.value.generated_at):null,
       combos.status==='fulfilled'?(combos.value.prices_checked_at||combos.value.generated_at):null,
       localSanitary.status==='fulfilled'?(localSanitary.value.prices_checked_at||localSanitary.value.generated_at):null,
       pulseBathrooms.status==='fulfilled'?(pulseBathrooms.value.prices_checked_at||pulseBathrooms.value.generated_at):null,
-      pulseKitchens.status==='fulfilled'?(pulseKitchens.value.prices_checked_at||pulseKitchens.value.generated_at):null
+      pulseKitchens.status==='fulfilled'?(pulseKitchens.value.prices_checked_at||pulseKitchens.value.generated_at):null,
+      pulseDecor.status==='fulfilled'?(pulseDecor.value.prices_checked_at||pulseDecor.value.generated_at):null
     ]);
 
     products=[
@@ -542,14 +559,16 @@ async function loadCatalogue(){
       ...pulseKitchenRows.map(p=>normalise(p,'kitchen')),
       ...comboRows.map(p=>normalise(p,'combo'))
     ];
-    const byKey=new Map(); products.forEach(p=>byKey.set((p._type+'|'+(p._code||p.id||p._name)).toLowerCase(),p)); products=[...byKey.values()];
+    const byKey=new Map(); products.forEach(p=>byKey.set((p._type+'|'+(p._code||p.id||p._name)).toLowerCase(),p)); products=mergeDecorCatalogue([...byKey.values()],pulseDecorRows,normalise);
     $('tile-count').textContent=products.filter(p=>p._type==='tile').length;
     $('sanitary-count').textContent=products.filter(p=>p._type==='sanitary').length;
     $('kitchen-count').textContent=products.filter(p=>p._type==='kitchen').length;
+    $('decor-count').textContent=pulseDecor.status==='fulfilled'?products.filter(p=>decorFilterMatch(p)).length:'—';
+    $('decor-catalogue-filter').disabled=pulseDecor.status!=='fulfilled';
     $('combo-count').textContent=products.filter(p=>p._type==='combo').length;
     $('catalogue-status').style.display='none';
     document.getElementById('catalogue-source-note')?.remove();
-    const note=document.createElement('p');note.id='catalogue-source-note';note.className='catalogue-source-note';note.textContent='Pulse catalogue · prices subject to stock availability and final confirmation.';$('product-grid').before(note);
+    const note=document.createElement('p');note.id='catalogue-source-note';note.className='catalogue-source-note';note.textContent=pulseDecor.status==='fulfilled'?'Pulse catalogue · prices subject to stock availability and final confirmation.':'Décor catalogue could not load. Reload the app to retry. Other products remain available.';$('product-grid').before(note);
     render();
     handleProductQuery();
   }catch(err){
@@ -565,10 +584,12 @@ function render(){
     else if(currentFilter==='favourites')filterOk=isFavourite(p);
     else if(currentFilter==='sanitary'||currentFilter.startsWith('bathroom-'))filterOk=bathroomFilterMatch(p,currentFilter);
     else if(currentFilter==='kitchen'||currentFilter.startsWith('kitchen-'))filterOk=kitchenFilterMatch(p,currentFilter);
+    else if(currentFilter==='decor'||currentFilter.startsWith('decor-'))filterOk=decorFilterMatch(p,currentFilter);
     else filterOk=p._type===currentFilter;
 
     return filterOk&&(!term||p._name.toLowerCase().includes(term)||p._code.toLowerCase().includes(term));
   });
+  if(currentFilter==='decor'||currentFilter.startsWith('decor-'))filtered.sort((a,b)=>a._name.localeCompare(b._name));
   const grid=$('product-grid'); grid.innerHTML='';
   if(!filtered.length){ grid.innerHTML='<div class="status-card" style="grid-column:1/-1">No matching products found.</div>'; return; }
   const frag=document.createDocumentFragment();
@@ -579,7 +600,7 @@ function render(){
       <button class="fav-btn ${isFavourite(p)?'active':''}" type="button" title="Favourite"><i class="${isFavourite(p)?'fa-solid':'fa-regular'} fa-star"></i></button>
       <label class="compare-check"><input type="checkbox" ${compareKeys.includes(key)?'checked':''}><span>Compare</span></label>
       <img loading="lazy" referrerpolicy="no-referrer" src="${esc(p._image)}" alt="${esc(p._name)}" onerror="this.onerror=null;this.src='./logo.png'">
-    </div><div class="product-card-body"><span class="product-kind">${typeLabel(p._type)}</span><h3>${esc(p._name)}</h3><span class="card-code">CODE: ${esc(p._code||'—')}</span><div class="card-price">${productPrice(p)}${isPerSqm(p)?'<small>per m²</small>':''}</div><button class="view-btn" type="button"><i class="fa-regular fa-eye"></i> View Details</button></div>`;
+    </div><div class="product-card-body"><span class="product-kind">${typeLabel(p._type)}</span><h3>${esc(p._name)}</h3><span class="card-code">CODE: ${esc(p._code||'—')}</span><div class="card-price">${productPrice(p)}${productUnitLabel(p)?'<small>'+productUnitLabel(p)+'</small>':''}</div><button class="view-btn" type="button"><i class="fa-regular fa-eye"></i> View Details</button></div>`;
     qs('.view-btn',card).onclick=()=>openProduct(p);
     qs('.fav-btn',card).onclick=e=>{e.stopPropagation();toggleFavourite(p)};
     qs('.compare-check input',card).onchange=e=>toggleCompare(key,e.target.checked);
@@ -623,57 +644,34 @@ function openComparison(){
 }
 function closeComparison(){$('compare-modal').classList.remove('open')}
 
-function typeLabel(t){return t==='tile'?'TILE':t==='combo'?'COMBO DEAL':t==='kitchen'?'KITCHEN':'BATHROOM';}
+function typeLabel(t){return t==='tile'?'TILE':t==='combo'?'COMBO DEAL':t==='kitchen'?'KITCHEN':t==='decor'?'DÉCOR':'BATHROOM';}
 $('product-search').addEventListener('input',render);
 
-qsa('#filter-row .filter-chip').forEach(b=>b.addEventListener('click',()=>{
-  qsa('#filter-row .filter-chip').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active');
-
-  currentFilter=b.dataset.filter;
-  const bathrooms=currentFilter==='sanitary';
-  const kitchens=currentFilter==='kitchen';
-  setBathroomFilterVisibility(bathrooms);
-  setKitchenFilterVisibility(kitchens);
-
-  if(bathrooms){
-    qsa('#bathroom-filter-row .bathroom-filter-chip').forEach(x=>x.classList.remove('active'));
-    qs('#bathroom-filter-row [data-bath-filter="all"]')?.classList.add('active');
+const catalogueFilterPanels=[
+  {id:'bathroom',family:'sanitary',prefix:'bathroom-',key:'bathFilter'},
+  {id:'kitchen',family:'kitchen',prefix:'kitchen-',key:'kitchenFilter'},
+  {id:'decor',family:'decor',prefix:'decor-',key:'decorFilter'}
+];
+function setCatalogueFilter(filter){
+  currentFilter=filter;
+  const panel=catalogueFilterPanels.find(p=>filter===p.family||filter.startsWith(p.prefix));
+  const family=panel?.family||filter;
+  qsa('#filter-row .filter-chip').forEach(b=>b.classList.toggle('active',b.dataset.filter===family));
+  setBathroomFilterVisibility(family==='sanitary');
+  setKitchenFilterVisibility(family==='kitchen');
+  setDecorFilterVisibility(family==='decor');
+  for(const p of catalogueFilterPanels){
+    const group=family===p.family&&filter!==p.family?filter.slice(p.prefix.length):'all';
+    qsa('#'+p.id+'-filter-row .'+p.id+'-filter-chip').forEach(b=>b.classList.toggle('active',b.dataset[p.key]===group));
   }
-  if(kitchens){
-    qsa('#kitchen-filter-row .kitchen-filter-chip').forEach(x=>x.classList.remove('active'));
-    qs('#kitchen-filter-row [data-kitchen-filter="all"]')?.classList.add('active');
-  }
   render();
-}));
-
-qsa('#bathroom-filter-row .bathroom-filter-chip').forEach(b=>b.addEventListener('click',()=>{
-  qsa('#bathroom-filter-row .bathroom-filter-chip').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active');
-
-  const group=b.dataset.bathFilter;
-  currentFilter=group==='all'?'sanitary':'bathroom-'+group;
-
-  qsa('#filter-row .filter-chip').forEach(x=>x.classList.remove('active'));
-  qs('#filter-row [data-filter="sanitary"]')?.classList.add('active');
-  setBathroomFilterVisibility(true);
-  setKitchenFilterVisibility(false);
-  render();
-}));
-
-qsa('#kitchen-filter-row .kitchen-filter-chip').forEach(b=>b.addEventListener('click',()=>{
-  qsa('#kitchen-filter-row .kitchen-filter-chip').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active');
-
-  const group=b.dataset.kitchenFilter;
-  currentFilter=group==='all'?'kitchen':'kitchen-'+group;
-
-  qsa('#filter-row .filter-chip').forEach(x=>x.classList.remove('active'));
-  qs('#filter-row [data-filter="kitchen"]')?.classList.add('active');
-  setKitchenFilterVisibility(true);
-  setBathroomFilterVisibility(false);
-  render();
-}));
+}
+qsa('#filter-row .filter-chip').forEach(b=>b.addEventListener('click',()=>setCatalogueFilter(b.dataset.filter)));
+for(const panel of catalogueFilterPanels){
+  qsa('#'+panel.id+'-filter-row .'+panel.id+'-filter-chip').forEach(b=>b.addEventListener('click',()=>{
+    const group=b.dataset[panel.key];setCatalogueFilter(group==='all'?panel.family:panel.prefix+group);
+  }));
+}
 
 function openProduct(p){
   selectedProduct=p;
@@ -683,12 +681,12 @@ function openProduct(p){
   $('product-code').textContent='Code: '+(p._code||'—');
   $('product-image').src=p._image;
   $('product-image').alt=p._name;
-  $('product-price').innerHTML=productPrice(p)+(isPerSqm(p)?'<small>per m²</small>':'')+(p._price&&!p.price_verified_at?'<small>Snapshot · confirm price</small>':'');
+  $('product-price').innerHTML=productPrice(p)+(productUnitLabel(p)?'<small>'+productUnitLabel(p)+'</small>':'')+(p._price&&!p.price_verified_at?'<small>Snapshot · confirm price</small>':'');
   $('product-description').textContent=p._description||defaultDescription(p._type);
   renderSpecs(p);
 
   const measure=$('smart-measure');
-  measure.hidden=!(p._type==='tile'&&p._sqm>0);
+  measure.hidden=!(p._type==='tile'&&isPerSqm(p)&&p._sqm>0);
   $('room-length').value='';
   $('room-width').value='';
   if($('room-name'))$('room-name').value='';
@@ -728,7 +726,7 @@ function openProduct(p){
     // Smart Measure now applies the required m² automatically — no second button is needed.
     if(useQtyButton) useQtyButton.hidden=true;
     if(closeButton) closeButton.hidden=false;
-    const tileSqmQty=(p._type==='tile'&&isPerSqm(p));
+    const tileSqmQty=isPerSqm(p);
     $('qty-label').textContent=tileSqmQty?'Quantity (m²)':'Quantity';
     $('product-qty').min=tileSqmQty?'0.01':'1';
     $('product-qty').step=tileSqmQty?'0.01':'1';
@@ -757,7 +755,7 @@ function closeProduct(){
 }
 qsa('[data-close-product]').forEach(b=>b.addEventListener('click',closeProduct));
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!publicProductMode)closeProduct();});
-function defaultDescription(type){return type==='combo'?'Complete Pulse Tiles combo deal. Review the included items and product specifications below.':type==='sanitary'?'Pulse Tiles bathroom product. Review the product details and specifications below.':type==='kitchen'?'Pulse Tiles kitchen product. Review the product details and specifications below.':'Pulse Tiles tile product. Use Smart Measure to calculate the required area and recommended boxes.';}
+function defaultDescription(type){return type==='combo'?'Complete Pulse Tiles combo deal. Review the included items and product specifications below.':type==='sanitary'?'Pulse Tiles bathroom product. Review the product details and specifications below.':type==='kitchen'?'Pulse Tiles kitchen product. Review the product details and specifications below.':type==='decor'?'Pulse Tiles décor product. Review its size, selling unit and specifications below.':'Pulse Tiles tile product. Use Smart Measure to calculate the required area and recommended boxes.';}
 function renderSpecs(p){
   const specs=[...p._attrs];
   if(p._sqm&&!specs.some(a=>/square/i.test(a.name)))specs.push({name:'Square metres per box',value:formatNumber(p._sqm)+' m²'});
@@ -817,7 +815,7 @@ function resetMeasure(){
   if(qtyBlock)qtyBlock.hidden=false;
 
   if(selectedProduct&&!publicProductMode&&$('add-cart')){
-    const tileSqmQty=(selectedProduct._type==='tile'&&isPerSqm(selectedProduct));
+    const tileSqmQty=isPerSqm(selectedProduct);
     $('qty-label').textContent=tileSqmQty?'Quantity (m²)':'Quantity';
     $('product-qty').readOnly=false;
     $('qty-minus').disabled=false;

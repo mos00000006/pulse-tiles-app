@@ -11,6 +11,6 @@ export const firebaseConfig = {
 };
 export const salesAppConfig = {
   storeName: 'Pulse Tiles',
-  departmentName: 'Tiles, Bathrooms & Kitchens',
+  departmentName: 'Tiles, Bathrooms, Kitchens & Décor',
   adminEmail: 'moyanamoses006@icloud.com' // Primary administrator; also configured in firestore.rules.
 };

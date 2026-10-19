@@ -1,5 +1,5 @@
 PULSE TILES SALES APP — GITHUB PAGES EDITION
-Version 1.1.2 | 19 October 2026
+Version 1.2.0 | 19 October 2026
 
 The Pulse logo is transparent throughout the app, welcome screen, install
 icons and quotation PDF. No white logo panels are used.
@@ -40,15 +40,26 @@ Database creation, publishing the rules and configuring the GitHub hostname
 still need to be completed in Firebase. Follow FIREBASE_SETUP.txt.
 
 CATALOGUE
-1,350 catalogue entries are included:
+1,453 product entries are available in the combined catalogue:
   477 tiles and tile essentials
   656 bathroom products
    67 kitchen products
+  103 additional decor products and size options
   150 combo entries
 
-1,325 prices were verified on 18 October 2026. The remaining 25 entries are
-marked for confirmation or price on request. Existing Pulse product image
-links are retained, so an internet connection loads those pictures.
+The Decor filter includes 262 selectable items from all 11 sections of
+Pulse's decor range. 159 existing tiles and finishes also appear in Decor.
+The 103 new items include 66 individually priced blind size options.
+Each blind size has its own product code, specifications and actual price.
+Mosaics sold per sheet keep sheet quantities; tiles sold per square metre
+keep their existing measuring and quoting features.
+
+Decor prices were checked on 19 October 2026. Other prices retain the
+18 October check. 1,428 displayed prices have been verified; 9 older price
+snapshots require confirmation and 16 products have price on request.
+Product pictures load from Pulse's original public image URLs and need
+an internet connection.
+Source: https://pulsetiles.co.za/decor-category-page/
 
 INCLUDED SALES TOOLS
 Product search, category filters, favourites, comparison, recent products,
@@ -62,8 +73,9 @@ online visit; pictures that are hosted by Pulse still require a connection.
 
 VERIFICATION
 Static resource paths, GitHub repository subpaths, transparent logo alpha,
-catalogue counts, JavaScript syntax, device record storage and Smart Measure
-were checked. Browser/camera/PDF rendering on real devices and a live Pulse
+catalogue counts, JavaScript syntax, device record storage, staff access,
+decor filters, blind-size prices, sheet quantities, cart/quote totals and
+Smart Measure were checked. Browser/camera/PDF rendering on real devices and a live Pulse
 Firebase connection have not been tested here.
 
 Official hosting instructions:

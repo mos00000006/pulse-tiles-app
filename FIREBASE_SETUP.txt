@@ -1,5 +1,5 @@
 PULSE SHARED STAFF ACCESS — FINISH FIREBASE SETUP
-Version 1.1.2 | 19 October 2026
+Version 1.2.0 | 19 October 2026
 
 ALREADY CONFIGURED
   Firebase project: pulsetiles-sales-app
@@ -43,7 +43,7 @@ The local package cannot create a database or publish server access rules.
    Extract the ZIP and replace the repository files with its contents.
    Keep index.html, sales-app/ and data/ side by side at the repository root.
    Wait for GitHub Pages to publish the update. Reload the app and check
-   that version 1.1.2 is shown. Use Update App if prompted.
+   that version 1.2.0 is shown. Use Update App if prompted.
 
 5. SIGN IN AS THE ADMINISTRATOR
    Email: moyanamoses006@icloud.com

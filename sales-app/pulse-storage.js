@@ -1,4 +1,4 @@
-import {firebaseConfig,salesAppConfig} from './firebase-config.js?v=20261019-firebase1';
+import {firebaseConfig,salesAppConfig} from './firebase-config.js?v=20261019-decor1';
 
 const ready=['apiKey','authDomain','projectId','appId'].every(k=>typeof firebaseConfig[k]==='string'&&firebaseConfig[k].trim()&&!firebaseConfig[k].includes('PASTE_'))&&Boolean(salesAppConfig.adminEmail);
 export const storageMode=ready?'firebase':'device';
