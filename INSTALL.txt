@@ -1,0 +1,15 @@
+PULSE TILES v1.2.3 PATCH - CATALOGUE + UPDATE REPAIR
+
+Upload all files in this ZIP to the ROOT OF YOUR EXISTING GITHUB REPOSITORY (not inside an extra folder). Preserve the ZIP folder structure. Replace matching files.
+
+Critical locations:
+  sales-app/index.html
+  sales-app/app.js
+  sales-app/sw.js
+  sales-app/app-version.json
+  sales-app/hardware-catalogue.js
+  data/pulse-hardware-catalogue.json
+
+Do NOT delete original files. Confirm data/pulse-tile-catalogue.json still exists alongside hardware JSON, and other data JSON files remain intact.
+
+Wait for GitHub Pages deploy. Reload with Ctrl+Shift+R, or reopen installed PWA. The Update button will clear only this app's own service worker/cache and reload. If a catalogue is missing, its name and fetch path now appear while available catalogues continue to display.

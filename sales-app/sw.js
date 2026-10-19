@@ -1,6 +1,18 @@
-const APP=new URL('./',self.location.href),ROOT=new URL('../',self.location.href);
-const PREFIX='pulse-github-'+APP.pathname+'-',CACHE=PREFIX+'v1.2.2';
-const FILES=['./','./index.html','./styles.css','./app.js','./pulse-storage.js','./decor-catalogue.js','./hardware-catalogue.js','./firebase-config.js','./logo.png','./manifest.webmanifest','./app-version.json','./icons/icon-192.png','./icons/icon-512.png','./vendor/html5-qrcode.min.js','./vendor/jspdf.umd.min.js','./vendor/fontawesome/css/all.min.css','./vendor/fontawesome/webfonts/fa-solid-900.woff2','./vendor/fontawesome/webfonts/fa-regular-400.woff2','./vendor/fontawesome/webfonts/fa-brands-400.woff2','./data/sanitary-products.json','../data/pulse-tile-catalogue.json','../data/pulse-bathroom-catalogue.json','../data/pulse-kitchen-catalogue.json','../data/pulse-decor-catalogue.json','../data/pulse-hardware-catalogue.json','../data/pulse-combo-catalogue.json'];
-self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>Promise.allSettled(FILES.map(p=>c.add(new URL(p,APP).href)))).then(()=>self.skipWaiting())));
-self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith(PREFIX)&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
-self.addEventListener('fetch',e=>{const url=new URL(e.request.url);if(e.request.method!=='GET'||url.origin!==APP.origin||!(url.pathname.startsWith(APP.pathname)||url.pathname.startsWith(new URL('data/',ROOT).pathname)))return;const key=url.origin+url.pathname;e.respondWith(fetch(e.request).then(response=>{if(response.ok){const copy=response.clone();caches.open(CACHE).then(c=>c.put(key,copy));}return response;}).catch(async()=>{const cached=await caches.match(key);if(cached)return cached;if(e.request.mode==='navigate')return caches.match(new URL('index.html',APP).href);throw new Error('Offline asset unavailable');}));});
+const APP=new URL('./',self.location.href);
+const PREFIX='pulse-github-'+APP.pathname+'-', CACHE=PREFIX+'v1.2.3';
+// Only cache application shell assets during install. Catalogues are fetched independently.
+const FILES=['./','./index.html','./styles.css','./app.js','./pulse-storage.js','./decor-catalogue.js','./hardware-catalogue.js','./firebase-config.js','./logo.png','./manifest.webmanifest','./app-version.json','./icons/icon-192.png','./icons/icon-512.png'];
+self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>Promise.allSettled(FILES.map(item=>cache.add(new URL(item,APP).href)))).then(()=>self.skipWaiting())));
+self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith(PREFIX)&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
+self.addEventListener('fetch',event=>{
+ const req=event.request,url=new URL(req.url);
+ if(req.method!=='GET'||url.origin!==APP.origin)return;
+ // Never serve version or product data from cache: show server truth (including 404).
+ if(url.pathname.includes('/data/')||url.pathname.endsWith('/app-version.json')||url.pathname.endsWith('/sw.js'))return;
+ if(!url.pathname.startsWith(APP.pathname))return;
+ event.respondWith(fetch(req).then(res=>{if(res.ok){const copy=res.clone();caches.open(CACHE).then(cache=>cache.put(req,copy)).catch(()=>{});}return res;}).catch(async()=>{
+  const cache=await caches.open(CACHE),saved=await cache.match(req,{ignoreSearch:true});if(saved)return saved;
+  if(req.mode==='navigate'){const fallback=await cache.match(new URL('index.html',APP).href);if(fallback)return fallback;}
+  return Response.error();
+ }));
+});

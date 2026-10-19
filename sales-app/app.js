@@ -1,8 +1,8 @@
-import { storageMode, deviceSession, rememberedDeviceName, watchCloudSession, signIn, signOut, resetPassword, createTeamMember, checkConnection } from './pulse-storage.js?v=20261019-decor1';
-import { doc, getDoc, setDoc, collection, getDocs, updateDoc, deleteDoc, query, where, serverTimestamp } from './pulse-storage.js?v=20261019-decor1';
-import { salesAppConfig } from './firebase-config.js?v=20261019-decor1';
-import { mergeDecorCatalogue, decorFilterMatch } from './decor-catalogue.js?v=20261019-decor1';
-import { mergeHardwareCatalogue, hardwareFilterMatch } from './hardware-catalogue.js?v=20261019-hardware1';
+import { storageMode, deviceSession, rememberedDeviceName, watchCloudSession, signIn, signOut, resetPassword, createTeamMember, checkConnection } from './pulse-storage.js?v=123-20261019';
+import { doc, getDoc, setDoc, collection, getDocs, updateDoc, deleteDoc, query, where, serverTimestamp } from './pulse-storage.js?v=123-20261019';
+import { salesAppConfig } from './firebase-config.js?v=123-20261019';
+import { mergeDecorCatalogue, decorFilterMatch } from './decor-catalogue.js?v=123-20261019';
+import { mergeHardwareCatalogue, hardwareFilterMatch } from './hardware-catalogue.js?v=123-20261019';
 
 
 const $ = (id) => document.getElementById(id);
@@ -30,7 +30,7 @@ let quoteHistory = loadQuoteHistory();
 let currentQuoteNumber = '';
 let currentQuoteSavedId = '';
 let smartMeasureState={productKey:'',area:0,boxes:0,cover:0,total:0,baseArea:0,wastePct:0,layout:'straight'};
-const CURRENT_APP_VERSION='1.2.1';
+const CURRENT_APP_VERSION='1.2.3';
 const PRIMARY_ADMIN_EMAIL=salesAppConfig.adminEmail.trim().toLowerCase();
 let catalogueUpdatedAt=null;
 let cloudQuotes=[];
@@ -156,6 +156,7 @@ async function checkAppVersion(){
     const menu=$('menu-version');
     if(current)current.textContent='v'+CURRENT_APP_VERSION;
     if(menu)menu.textContent='Version '+CURRENT_APP_VERSION;
+    if(version === CURRENT_APP_VERSION){const banner=$('app-update-banner');if(banner)banner.hidden=true;}
     if(version && version!==CURRENT_APP_VERSION){
       const banner=$('app-update-banner');
       if(banner){
@@ -170,15 +171,27 @@ async function forceAppUpdate(){
   if(btn){btn.disabled=true;btn.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Updating…';}
   try{
     if('serviceWorker' in navigator){
-      const regs=await navigator.serviceWorker.getRegistrations();
-      await Promise.all(regs.map(r=>r.update().catch(()=>{})));
+      const registrations=await navigator.serviceWorker.getRegistrations();
+      for(const registration of registrations){
+        // Remove only service workers controlling this application's directory.
+        if(new URL(registration.scope).pathname.startsWith(new URL('./',location.href).pathname))
+          await registration.unregister();
+      }
     }
     if('caches' in window){
       const keys=await caches.keys();
-      const prefix='pulse-github-'+new URL('./',location.href).pathname+'-';await Promise.all(keys.filter(k=>k.startsWith(prefix)).map(k=>caches.delete(k)));
+      const prefix='pulse-github-'+new URL('./',location.href).pathname+'-';
+      await Promise.all(keys.filter(k=>k.startsWith(prefix)).map(k=>caches.delete(k)));
     }
-  }catch{}
-  window.location.reload();
+    const target=new URL(location.href);
+    target.searchParams.set('pulse_updated','1.2.3');
+    // Navigation to a fresh unique URL bypasses stale document cache on the next launch.
+    location.replace(target.href);
+  }catch(error){
+    console.error('Update failed',error);
+    if(btn){btn.disabled=false;btn.textContent='Retry update';}
+    toast('Update could not finish: '+(error.message||'unknown error'));
+  }
 }
 function initProfessionalStatus(){
   setNetworkState();
@@ -215,7 +228,7 @@ if ('serviceWorker' in navigator) window.addEventListener('load',async()=>{
       refreshing=true;
       window.location.reload();
     });
-    const reg=await navigator.serviceWorker.register('./sw.js?v=20261019-decor1',{updateViaCache:'none'});
+    const reg=await navigator.serviceWorker.register('./sw.js?v=123-20261019',{updateViaCache:'none'});
     await reg.update();
   }catch(e){console.warn('Service worker update skipped',e);}
 });
@@ -427,7 +440,9 @@ async function fetchJson(url){
       const endpoint=new URL(candidate,document.baseURI);
       const response=await fetch(endpoint.href+(endpoint.search?'&':'?')+'v='+Date.now(),{cache:'no-store'});
       if(!response.ok){failures.push(endpoint.pathname+' (HTTP '+response.status+')');continue;}
-      return await response.json();
+      const value=await response.json();
+      if(!value||!Array.isArray(value.products))throw new Error('Invalid catalogue JSON: missing products array');
+      return value;
     }catch(error){failures.push(candidate+' ('+(error?.message||'network error')+')');}
   }
   throw new Error('Cannot load '+url+'. Checked: '+failures.join('; '));
@@ -555,7 +570,9 @@ async function loadCatalogue(){
       fetchJson('../data/pulse-decor-catalogue.json'),
       fetchJson('../data/pulse-hardware-catalogue.json')
     ]);
-    if(tiles.status==='rejected')throw new Error('Main tile catalogue unavailable: '+(tiles.reason?.message||'check the data folder'));
+    const datasets=[['Tiles',tiles],['Combos',combos],['Sanware',localSanitary],['Bathrooms',pulseBathrooms],['Kitchens',pulseKitchens],['Décor',pulseDecor],['Hardware',pulseHardware]];
+    const unavailable=datasets.filter(([,v])=>v.status==='rejected');
+    if(unavailable.length===datasets.length)throw new Error('All catalogues failed: '+unavailable.map(([name,v])=>name+': '+v.reason?.message).join(' | '));
     const tileRows=tiles.status==='fulfilled'?(tiles.value.products||[]):[];
     const comboRows=combos.status==='fulfilled'?(combos.value.products||[]):[];
     const localSanitaryRows=localSanitary.status==='fulfilled'?(localSanitary.value.products||[]):[];
@@ -590,7 +607,13 @@ async function loadCatalogue(){
     $('hardware-count').textContent=pulseHardware.status==='fulfilled'?products.filter(p=>hardwareFilterMatch(p)).length:'—';
     $('hardware-catalogue-filter').disabled=pulseHardware.status!=='fulfilled';
     $('combo-count').textContent=products.filter(p=>p._type==='combo').length;
-    $('catalogue-status').style.display='none';
+    if(unavailable.length){
+      const status=$('catalogue-status');
+      status.style.display='block';
+      status.innerHTML='<strong>Some catalogues could not load:</strong><p style="font-size:.85rem;overflow-wrap:anywhere"></p><button id="retry-catalogue" class="secondary-btn compact" type="button">Retry missing products</button>';
+      status.querySelector('p').textContent=unavailable.map(([name,v])=>name+': '+v.reason?.message).join(' | ');
+      $('retry-catalogue')?.addEventListener('click',()=>{products=[];loadCatalogue()});
+    }else $('catalogue-status').style.display='none';
     document.getElementById('catalogue-source-note')?.remove();
     const note=document.createElement('p');note.id='catalogue-source-note';note.className='catalogue-source-note';note.textContent=pulseDecor.status==='fulfilled'?'Pulse catalogue · prices subject to stock availability and final confirmation.':'Décor catalogue could not load. Reload the app to retry. Other products remain available.';$('product-grid').before(note);
     render();
